@@ -1,0 +1,34 @@
+package br.com.integratefarma.itemvenda.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity(name = "tb_itensvendas")
+public class ItemVendaEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "venda_id", insertable= false, updatable=false)
+    private Long idVenda;
+
+    @Column(name = "produto_id", insertable= false, updatable=false)
+    private Long idProduto;
+
+    @Column(name = "qtd")
+    private Long quantidade;
+
+    @Column(name = "subtotal")
+    private BigDecimal subtotal;
+}
