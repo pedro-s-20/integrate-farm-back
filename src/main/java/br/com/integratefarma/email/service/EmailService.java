@@ -113,20 +113,20 @@ public class EmailService {
             case AGENDAMENTO_CRIADO_CLIENTE ->
                     template = fmConfiguration.getTemplate("agendamento-criado-cliente.ftl");
 
-            case AGENDAMENTO_CRIADO_MEDICO ->
-                    template = fmConfiguration.getTemplate("agendamento-criado-medico.ftl");
+            case AGENDAMENTO_CRIADO_PRESTADOR ->
+                    template = fmConfiguration.getTemplate("agendamento-criado-prestador.ftl");
 
             case AGENDAMENTO_EDITADO_CLIENTE ->
                     template = fmConfiguration.getTemplate("agendamento-editado-cliente.ftl");
 
-            case AGENDAMENTO_EDITADO_MEDICO ->
-                    template = fmConfiguration.getTemplate("agendamento-editado-medico.ftl");
+            case AGENDAMENTO_EDITADO_PRESTADOR ->
+                    template = fmConfiguration.getTemplate("agendamento-editado-prestador.ftl");
 
             case AGENDAMENTO_CANCELADO_CLIENTE ->
                     template = fmConfiguration.getTemplate("agendamento-cancelado-cliente.ftl");
 
-            case AGENDAMENTO_CANCELADO_MEDICO ->
-                    template = fmConfiguration.getTemplate("agendamento-cancelado-medico.ftl");
+            case AGENDAMENTO_CANCELADO_PRESTADOR ->
+                    template = fmConfiguration.getTemplate("agendamento-cancelado-prestador.ftl");
             default ->
                     template = fmConfiguration.getTemplate("agendamento-criado-cliente.ftl");
         }

@@ -1,6 +1,5 @@
 package br.com.integratefarma.prestadorservico.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MedicoCompletoDTO {
+public class PrestadorServicoCompletoDTO {
 
-    private Integer idMedico;
+    private Integer idPrestadorServico;
     private String crm;
     private Integer idEspecialidade;
     private Integer idUsuario;

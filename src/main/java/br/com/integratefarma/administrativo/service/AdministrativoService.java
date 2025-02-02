@@ -6,9 +6,9 @@ import br.com.integratefarma.cliente.service.ClienteService;
 import br.com.integratefarma.email.enums.TipoEmail;
 import br.com.integratefarma.email.service.EmailService;
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
-import br.com.integratefarma.prestadorservico.dto.MedicoCompletoDTO;
-import br.com.integratefarma.prestadorservico.repository.MedicoRepository;
-import br.com.integratefarma.prestadorservico.service.MedicoService;
+import br.com.integratefarma.prestadorservico.dto.PrestadorServicoCompletoDTO;
+import br.com.integratefarma.prestadorservico.repository.PrestadorServicoRepository;
+import br.com.integratefarma.prestadorservico.service.PrestadorServicoService;
 import br.com.integratefarma.usuario.dto.UsuarioCreateDTO;
 import br.com.integratefarma.usuario.dto.UsuarioDTO;
 import br.com.integratefarma.usuario.dto.UsuarioUpdateDTO;
@@ -39,8 +39,8 @@ public class AdministrativoService {
     private final UsuarioRepository usuarioRepository;
     private final EmailService emailService;
     private final ClienteService clienteService;
-    private final MedicoService medicoService;
-    private final MedicoRepository medicoRepository;
+    private final PrestadorServicoService prestadorServicoService;
+    private final PrestadorServicoRepository prestadorServicoRepository;
     private final ClienteRepository clienteRepository;
 
     public UsuarioDTO reativarUsuario(Integer idUsuario) throws RegraDeNegocioException {
@@ -110,29 +110,29 @@ public class AdministrativoService {
         return clienteService.getById(id);
     }
 
-    public MedicoCompletoDTO getMedicoById(Integer id) throws RegraDeNegocioException {
-        return medicoService.getById(id);
+    public PrestadorServicoCompletoDTO getMedicoById(Integer id) throws RegraDeNegocioException {
+        return prestadorServicoService.getById(id);
     }
 
     public void removerMedico(Integer id) throws RegraDeNegocioException {
-        medicoService.remover(id);
+        prestadorServicoService.remover(id);
     }
 
     public void removerCliente(Integer id) throws RegraDeNegocioException {
         clienteService.remover(id);
     }
 
-    public PageDTO<MedicoCompletoDTO> listMedico(Integer pagina, Integer tamanho){
+    public PageDTO<PrestadorServicoCompletoDTO> listMedico(Integer pagina, Integer tamanho){
         Pageable solicitacaoPagina = PageRequest.of(pagina,tamanho);
-        Page<MedicoCompletoDTO> medico = medicoRepository.listarFull(solicitacaoPagina);
-        List<MedicoCompletoDTO> medicoCompletoDTOS = medico.getContent().stream()
+        Page<PrestadorServicoCompletoDTO> medico = prestadorServicoRepository.listarFull(solicitacaoPagina);
+        List<PrestadorServicoCompletoDTO> prestadorServicoCompletoDTOS = medico.getContent().stream()
                 .toList();
 
         return new PageDTO<>(medico.getTotalElements(),
                 medico.getTotalPages(),
                 pagina,
                 tamanho,
-                medicoCompletoDTOS);
+                prestadorServicoCompletoDTOS);
     }
 
     public PageDTO<ClienteCompletoDTO> listCliente(Integer pagina, Integer tamanho) {

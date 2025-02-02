@@ -3,7 +3,7 @@ package br.com.integratefarma.administrativo.controller;
 import br.com.integratefarma.administrativo.service.AdministrativoService;
 import br.com.integratefarma.cliente.dto.ClienteCompletoDTO;
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
-import br.com.integratefarma.prestadorservico.dto.MedicoCompletoDTO;
+import br.com.integratefarma.prestadorservico.dto.PrestadorServicoCompletoDTO;
 import br.com.integratefarma.usuario.dto.UsuarioCreateDTO;
 import br.com.integratefarma.usuario.dto.UsuarioDTO;
 import br.com.integratefarma.usuario.dto.UsuarioUpdateDTO;
@@ -38,7 +38,7 @@ public class AdministrativoController implements DocumentacaoAdministracao {
     }
 
     @Override
-    public ResponseEntity<MedicoCompletoDTO> getByIdMedico(Integer id) throws RegraDeNegocioException {
+    public ResponseEntity<PrestadorServicoCompletoDTO> getByIdMedico(Integer id) throws RegraDeNegocioException {
         return new ResponseEntity<>(administrativoService.getMedicoById(id), HttpStatus.OK);
     }
     @Override
@@ -74,7 +74,7 @@ public class AdministrativoController implements DocumentacaoAdministracao {
         return ResponseEntity.ok().build();
     }
     @Override
-    public ResponseEntity<PageDTO<MedicoCompletoDTO>> paginadoMedico(Integer pagina, Integer tamanho){
+    public ResponseEntity<PageDTO<PrestadorServicoCompletoDTO>> paginadoMedico(Integer pagina, Integer tamanho){
         return new ResponseEntity<>(administrativoService.listMedico(pagina,tamanho),HttpStatus.OK);
     }
     @Override

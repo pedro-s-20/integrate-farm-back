@@ -2,7 +2,7 @@ package br.com.integratefarma.agendamento.repository;
 
 import br.com.integratefarma.agendamento.entity.AgendamentoEntity;
 import br.com.integratefarma.cliente.entity.ClienteEntity;
-import br.com.integratefarma.prestadorservico.entity.MedicoEntity;
+import br.com.integratefarma.prestadorservico.entity.PrestadorServicoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ public interface AgendamentoRepository extends JpaRepository<AgendamentoEntity, 
     List<AgendamentoEntity> findAllByIdMedico(Integer id);
 
     
-    void deleteByMedicoEntity(MedicoEntity medicoEntity);
+    void deleteByMedicoEntity(PrestadorServicoEntity prestadorServicoEntity);
 
     void deleteByClienteEntity(ClienteEntity clienteEntity);
 }

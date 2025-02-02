@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Novo agendamento</title>
+    <title>Agendamento editado</title>
 </head>
 
 <body>
@@ -13,9 +13,9 @@
                 <tr>
                     <td align="center" valign="top" bgcolor="#ffffff"
                         style="background-color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #000000; padding: 0px 15px 10px 15px;">
-                    <h2> Olá ${agendamento.getMedicoEntity().getUsuarioEntity().getNome()}, </h2>
+                    <h2> Olá ${agendamento.getPrestadorServicoEntity().getUsuarioEntity().getNome()}, </h2>
                     <p>
-                        Uma nova consulta foi agendada para você. Segue as informações: <br>
+                        Um agendamento seu foi editado. Segue as novas informações: <br>
                         <strong>ID do agendamento: ${agendamento.getIdAgendamento()}</strong><br>
                         <strong>Data e horário: ${agendamento.getDataHorario()} <strong>
                         Paciente a ser atendido: ${agendamento.getClienteEntity().getUsuarioEntity().getNome()} <br>

@@ -1,6 +1,6 @@
 package br.com.integratefarma.usuario.entity;
 
-import br.com.integratefarma.prestadorservico.entity.MedicoEntity;
+import br.com.integratefarma.prestadorservico.entity.PrestadorServicoEntity;
 import br.com.integratefarma.cliente.entity.ClienteEntity;
 import br.com.integratefarma.cargo.entity.CargoEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -52,7 +52,7 @@ public class UsuarioEntity implements UserDetails {
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "usuarioEntity", cascade = CascadeType.ALL)
-    private MedicoEntity medicoEntity;
+    private PrestadorServicoEntity prestadorServicoEntity;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

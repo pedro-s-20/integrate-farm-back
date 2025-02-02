@@ -1,6 +1,6 @@
 package br.com.integratefarma.especialidade.entity;
 
-import br.com.integratefarma.prestadorservico.entity.MedicoEntity;
+import br.com.integratefarma.prestadorservico.entity.PrestadorServicoEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -29,6 +29,6 @@ public class EspecialidadeEntity {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "especialidadeEntity", cascade = CascadeType.MERGE)
-    private Set<MedicoEntity> medicoEntities;
+    private Set<PrestadorServicoEntity> medicoEntities;
 
 }

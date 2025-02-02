@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MedicoDTO extends MedicoCreateDTO {
+public class PrestadorServicoDTO extends PrestadorServicoCreateDTO {
 
-    @Schema(description = "Id do Medico", example = "1", required = true)
-    private Integer idMedico;
+    @Schema(description = "Id do Prestador de Servico", example = "1", required = true)
+    private Integer idPrestadorServico;
 }

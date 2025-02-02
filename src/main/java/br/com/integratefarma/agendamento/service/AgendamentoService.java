@@ -3,7 +3,7 @@ package br.com.integratefarma.agendamento.service;
 import br.com.integratefarma.agendamento.dto.AgendamentoClienteRelatorioDTO;
 import br.com.integratefarma.agendamento.dto.AgendamentoCreateDTO;
 import br.com.integratefarma.agendamento.dto.AgendamentoDTO;
-import br.com.integratefarma.agendamento.dto.AgendamentoMedicoRelatorioDTO;
+import br.com.integratefarma.agendamento.dto.AgendamentoPrestadorServicoRelatorioDTO;
 import br.com.integratefarma.agendamento.entity.AgendamentoEntity;
 import br.com.integratefarma.agendamento.repository.AgendamentoRepository;
 import br.com.integratefarma.cliente.entity.ClienteEntity;
@@ -11,8 +11,8 @@ import br.com.integratefarma.cliente.service.ClienteService;
 import br.com.integratefarma.email.enums.TipoEmail;
 import br.com.integratefarma.email.service.EmailService;
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
-import br.com.integratefarma.prestadorservico.entity.MedicoEntity;
-import br.com.integratefarma.prestadorservico.service.MedicoService;
+import br.com.integratefarma.prestadorservico.entity.PrestadorServicoEntity;
+import br.com.integratefarma.prestadorservico.service.PrestadorServicoService;
 import br.com.integratefarma.utils.dto.PageDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.TemplateException;
@@ -32,24 +32,24 @@ public class AgendamentoService {
 
     private final AgendamentoRepository agendamentoRepository;
     private final ClienteService clienteService;
-    private final MedicoService medicoService;
+    private final PrestadorServicoService prestadorServicoService;
     private final ObjectMapper objectMapper;
     private final EmailService emailService;
 
     public AgendamentoDTO adicionar(AgendamentoCreateDTO agendamentoCreateDTO) throws RegraDeNegocioException {
         ClienteEntity clienteEntity = clienteService.getCliente(agendamentoCreateDTO.getIdCliente());
-        MedicoEntity medicoEntity = medicoService.getMedico(agendamentoCreateDTO.getIdMedico());
+        PrestadorServicoEntity prestadorServicoEntity = prestadorServicoService.getMedico(agendamentoCreateDTO.getIdMedico());
 
         AgendamentoEntity agendamentoEntity = objectMapper.convertValue(agendamentoCreateDTO, AgendamentoEntity.class);
 
         agendamentoEntity.setClienteEntity(clienteEntity);
-        agendamentoEntity.setMedicoEntity(medicoEntity);
-        agendamentoEntity.setValorAgendamento(medicoEntity.getEspecialidadeEntity().getValor());
+        agendamentoEntity.setPrestadorServicoEntity(prestadorServicoEntity);
+        agendamentoEntity.setValorAgendamento(prestadorServicoEntity.getEspecialidadeEntity().getValor());
 
         try{
             agendamentoRepository.save(agendamentoEntity);
             emailService.sendEmailAgendamento(clienteEntity.getUsuarioEntity(), agendamentoEntity, TipoEmail.AGENDAMENTO_CRIADO_CLIENTE);
-            emailService.sendEmailAgendamento(medicoEntity.getUsuarioEntity(), agendamentoEntity, TipoEmail.AGENDAMENTO_CRIADO_MEDICO);
+            emailService.sendEmailAgendamento(prestadorServicoEntity.getUsuarioEntity(), agendamentoEntity, TipoEmail.AGENDAMENTO_CRIADO_PRESTADOR);
         } catch (MessagingException | TemplateException | IOException e) {
             throw new RegraDeNegocioException("Erro ao enviar o e-mail com as informações do agendamento.");
         }
@@ -59,19 +59,19 @@ public class AgendamentoService {
     public AgendamentoDTO editar(Integer id, AgendamentoCreateDTO agendamentoCreateDTO) throws RegraDeNegocioException {
         AgendamentoEntity agendamentoEntity = getAgendamento(id);
         ClienteEntity clienteEntity = clienteService.getCliente(agendamentoCreateDTO.getIdCliente());
-        MedicoEntity medicoEntity = medicoService.getMedico(agendamentoCreateDTO.getIdMedico());
+        PrestadorServicoEntity prestadorServicoEntity = prestadorServicoService.getMedico(agendamentoCreateDTO.getIdMedico());
 
-        agendamentoEntity.setMedicoEntity(medicoEntity);
+        agendamentoEntity.setPrestadorServicoEntity(prestadorServicoEntity);
         agendamentoEntity.setClienteEntity(clienteEntity);
         agendamentoEntity.setExame(agendamentoCreateDTO.getExame());
         agendamentoEntity.setTratamento(agendamentoCreateDTO.getTratamento());
         agendamentoEntity.setDataHorario(agendamentoCreateDTO.getDataHorario());
-        agendamentoEntity.setValorAgendamento(medicoEntity.getEspecialidadeEntity().getValor());
+        agendamentoEntity.setValorAgendamento(prestadorServicoEntity.getEspecialidadeEntity().getValor());
 
         agendamentoRepository.save(agendamentoEntity);
         try{
             emailService.sendEmailAgendamento(clienteEntity.getUsuarioEntity(), agendamentoEntity, TipoEmail.AGENDAMENTO_EDITADO_CLIENTE);
-            emailService.sendEmailAgendamento(medicoEntity.getUsuarioEntity(), agendamentoEntity, TipoEmail.AGENDAMENTO_EDITADO_MEDICO);
+            emailService.sendEmailAgendamento(prestadorServicoEntity.getUsuarioEntity(), agendamentoEntity, TipoEmail.AGENDAMENTO_EDITADO_PRESTADOR);
         } catch (MessagingException | TemplateException | IOException e) {
             throw new RegraDeNegocioException("Erro ao enviar o e-mail de edição no agendamento.");
         }
@@ -83,15 +83,15 @@ public class AgendamentoService {
         AgendamentoEntity agendamentoEntity = getAgendamento(id);
         try{
             emailService.sendEmailAgendamento(agendamentoEntity.getClienteEntity().getUsuarioEntity(), agendamentoEntity, TipoEmail.AGENDAMENTO_CANCELADO_CLIENTE);
-            emailService.sendEmailAgendamento(agendamentoEntity.getMedicoEntity().getUsuarioEntity(), agendamentoEntity, TipoEmail.AGENDAMENTO_CANCELADO_MEDICO);
+            emailService.sendEmailAgendamento(agendamentoEntity.getPrestadorServicoEntity().getUsuarioEntity(), agendamentoEntity, TipoEmail.AGENDAMENTO_CANCELADO_PRESTADOR);
         } catch (MessagingException | TemplateException | IOException e) {
             throw new RegraDeNegocioException("Erro ao enviar o e-mail de cancelamento do agendamento.");
         }
         agendamentoRepository.delete(agendamentoEntity);
     }
 
-    public void removerPorMedicoDesativado(MedicoEntity medicoEntity) throws RegraDeNegocioException {
-        agendamentoRepository.deleteByMedicoEntity(medicoEntity);
+    public void removerPorMedicoDesativado(PrestadorServicoEntity prestadorServicoEntity) throws RegraDeNegocioException {
+        agendamentoRepository.deleteByMedicoEntity(prestadorServicoEntity);
     }
 
     public void removerPorClienteDesativado(ClienteEntity clienteEntity) throws RegraDeNegocioException {
@@ -122,8 +122,8 @@ public class AgendamentoService {
         return agendamentoRelatorio;
     }
 
-    public AgendamentoMedicoRelatorioDTO getRelatorioMedicoById(Integer idMedico) throws RegraDeNegocioException {
-        AgendamentoMedicoRelatorioDTO agendamentoRelatorio = objectMapper.convertValue(medicoService.getById(idMedico), AgendamentoMedicoRelatorioDTO.class);
+    public AgendamentoPrestadorServicoRelatorioDTO getRelatorioMedicoById(Integer idMedico) throws RegraDeNegocioException {
+        AgendamentoPrestadorServicoRelatorioDTO agendamentoRelatorio = objectMapper.convertValue(prestadorServicoService.getById(idMedico), AgendamentoPrestadorServicoRelatorioDTO.class);
 
         List<AgendamentoDTO> allByIdMedico = agendamentoRepository.findAllByIdMedico(idMedico).stream()
                 .map(agendamentoEntity -> objectMapper.convertValue(agendamentoEntity, AgendamentoDTO.class))

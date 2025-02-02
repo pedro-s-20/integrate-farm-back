@@ -18,7 +18,7 @@
                         Um agendamento seu foi editado. Segue as novas informações: <br>
                         <strong>ID do agendamento: ${agendamento.getIdAgendamento()}</strong><br>
                         <strong>Data e horário: ${agendamento.getDataHorario()} <strong>
-                        Médico que lhe atenderá: ${agendamento.getMedicoEntity().getUsuarioEntity().getNome()} <br>
+                        Prestador de serviço que lhe atenderá: ${agendamento.getPrestadorServicoEntity().getUsuarioEntity().getNome()} <br>
                         Qualquer dúvida é só contatar o suporte pelo e-mail ${email}<br>
                         Att,<br>
                         Integrate Farm Corp.<br>

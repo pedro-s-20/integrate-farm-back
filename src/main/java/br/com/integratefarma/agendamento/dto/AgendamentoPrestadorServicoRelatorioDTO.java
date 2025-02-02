@@ -1,6 +1,6 @@
 package br.com.integratefarma.agendamento.dto;
 
-import br.com.integratefarma.prestadorservico.dto.MedicoCompletoDTO;
+import br.com.integratefarma.prestadorservico.dto.PrestadorServicoCompletoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AgendamentoMedicoRelatorioDTO extends MedicoCompletoDTO {
+public class AgendamentoPrestadorServicoRelatorioDTO extends PrestadorServicoCompletoDTO {
 
     private Integer idMedico;
     private String crm;
@@ -28,7 +28,7 @@ public class AgendamentoMedicoRelatorioDTO extends MedicoCompletoDTO {
 
     private List<AgendamentoDTO> agendamentoDTOList;
 
-    public AgendamentoMedicoRelatorioDTO(Integer idMedico, String crm, Integer idEspecialidade, Integer idUsuario, Double valor, String nomeEspecilidade, String cpf, String email, String nome, String nomeCargo, String contatos, String cep, Integer numero) {
+    public AgendamentoPrestadorServicoRelatorioDTO(Integer idMedico, String crm, Integer idEspecialidade, Integer idUsuario, Double valor, String nomeEspecilidade, String cpf, String email, String nome, String nomeCargo, String contatos, String cep, Integer numero) {
         this.idMedico = idMedico;
         this.crm = crm;
         this.idEspecialidade = idEspecialidade;

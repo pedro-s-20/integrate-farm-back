@@ -1,7 +1,7 @@
 package br.com.integratefarma.agendamento.controller;
 
 import br.com.integratefarma.agendamento.dto.AgendamentoClienteRelatorioDTO;
-import br.com.integratefarma.agendamento.dto.AgendamentoMedicoRelatorioDTO;
+import br.com.integratefarma.agendamento.dto.AgendamentoPrestadorServicoRelatorioDTO;
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
 import br.com.integratefarma.utils.dto.PageDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,7 +57,7 @@ public interface DocumentacaoAgendamento<AgendamentoDTO, entrada, id, numero2> {
             }
     )
     @GetMapping("/{idMedico}/relatorio-medico")
-    ResponseEntity<AgendamentoMedicoRelatorioDTO> getMedicoByIdPersonalizado(@PathVariable("idMedico") id idMedico) throws RegraDeNegocioException;
+    ResponseEntity<AgendamentoPrestadorServicoRelatorioDTO> getMedicoByIdPersonalizado(@PathVariable("idMedico") id idMedico) throws RegraDeNegocioException;
 
     @Operation(summary = "Criar Agendamentos", description = "Cria um Agendamentos")
     @ApiResponses(

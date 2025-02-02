@@ -2,7 +2,7 @@ package br.com.integratefarma.administrativo.controller;
 
 import br.com.integratefarma.cliente.dto.ClienteCompletoDTO;
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
-import br.com.integratefarma.prestadorservico.dto.MedicoCompletoDTO;
+import br.com.integratefarma.prestadorservico.dto.PrestadorServicoCompletoDTO;
 import br.com.integratefarma.usuario.dto.UsuarioCreateDTO;
 import br.com.integratefarma.usuario.dto.UsuarioDTO;
 import br.com.integratefarma.usuario.dto.UsuarioUpdateDTO;
@@ -49,7 +49,7 @@ public interface DocumentacaoAdministracao {
             }
     )
     @GetMapping("/medico/{id}")
-    ResponseEntity<MedicoCompletoDTO> getByIdMedico(Integer id) throws RegraDeNegocioException;
+    ResponseEntity<PrestadorServicoCompletoDTO> getByIdMedico(Integer id) throws RegraDeNegocioException;
 
     @Operation(summary = "Lista todos os administradores", description = "Lista todos os administradores")
     @ApiResponses(
@@ -131,7 +131,7 @@ public interface DocumentacaoAdministracao {
             }
     )
     @GetMapping("/paginado-medico/")
-    ResponseEntity<PageDTO<MedicoCompletoDTO>> paginadoMedico(Integer pagina, Integer tamanho);
+    ResponseEntity<PageDTO<PrestadorServicoCompletoDTO>> paginadoMedico(Integer pagina, Integer tamanho);
 
 
     @Operation(summary = "Lista todos os Clientes", description = "Lista todos os Clientes de forma paginada")

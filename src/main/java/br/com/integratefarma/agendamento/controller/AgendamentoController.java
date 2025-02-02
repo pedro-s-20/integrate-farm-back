@@ -3,7 +3,7 @@ package br.com.integratefarma.agendamento.controller;
 import br.com.integratefarma.agendamento.dto.AgendamentoClienteRelatorioDTO;
 import br.com.integratefarma.agendamento.dto.AgendamentoCreateDTO;
 import br.com.integratefarma.agendamento.dto.AgendamentoDTO;
-import br.com.integratefarma.agendamento.dto.AgendamentoMedicoRelatorioDTO;
+import br.com.integratefarma.agendamento.dto.AgendamentoPrestadorServicoRelatorioDTO;
 import br.com.integratefarma.agendamento.service.AgendamentoService;
 import br.com.integratefarma.utils.dto.PageDTO;
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
@@ -41,7 +41,7 @@ public class AgendamentoController implements DocumentacaoAgendamento<Agendament
     }
 
     @Override
-    public ResponseEntity<AgendamentoMedicoRelatorioDTO> getMedicoByIdPersonalizado(@PathVariable("idMedico") Integer idMedico) throws RegraDeNegocioException {
+    public ResponseEntity<AgendamentoPrestadorServicoRelatorioDTO> getMedicoByIdPersonalizado(@PathVariable("idMedico") Integer idMedico) throws RegraDeNegocioException {
         return new ResponseEntity<>(agendamentoService.getRelatorioMedicoById(idMedico), HttpStatus.OK);
     }
 

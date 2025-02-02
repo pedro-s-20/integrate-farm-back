@@ -18,12 +18,12 @@ import java.util.Set;
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Entity(name = "Medico")
-public class MedicoEntity {
+@Entity(name = "PRESTADOR_SERVICO")
+public class PrestadorServicoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_medico")
-    private Integer idMedico;
+    @Column(name = "id_prestador_servico")
+    private Integer idPrestadorServico;
 
     @Column(name = "id_usuario", insertable = false, updatable=false)
     private Integer idUsuario;
@@ -43,7 +43,7 @@ public class MedicoEntity {
     private UsuarioEntity usuarioEntity;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "medicoEntity", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "prestadorServicoEntity", cascade = CascadeType.ALL)
     private Set<AgendamentoEntity> agendamentoEntities;
 
 }

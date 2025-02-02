@@ -1,7 +1,7 @@
 package br.com.integratefarma.agendamento.entity;
 
 import br.com.integratefarma.cliente.entity.ClienteEntity;
-import br.com.integratefarma.prestadorservico.entity.MedicoEntity;
+import br.com.integratefarma.prestadorservico.entity.PrestadorServicoEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -44,7 +44,7 @@ public class AgendamentoEntity {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "id_medico", referencedColumnName = "id_medico")
-    private MedicoEntity medicoEntity;
+    @JoinColumn(name = "id_prestador_servico", referencedColumnName = "id_prestador_servico")
+    private PrestadorServicoEntity prestadorServicoEntity;
 
 }
