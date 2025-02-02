@@ -1,8 +1,11 @@
 package br.com.integratefarma.cliente.entity;
 
+import br.com.integratefarma.agendamento.entity.AgendamentoEntity;
 import br.com.integratefarma.parcela.entity.ParcelaEntity;
+import br.com.integratefarma.usuario.entity.UsuarioEntity;
 import br.com.integratefarma.venda.entity.VendaEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,13 +18,14 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity(name = "tb_clientes")
 public class ClienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "nome")
     private String nome;
@@ -62,6 +66,9 @@ public class ClienteEntity {
     @Column(name = "estado")
     private String estado;
 
+    @Column(name = "id_usuario", insertable= false, updatable=false)
+    private Integer idUsuario;
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "clienteEntity", cascade = CascadeType.MERGE)
     private Set<ParcelaEntity> parcelaEntities;
@@ -69,4 +76,13 @@ public class ClienteEntity {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "clienteEntity", cascade = CascadeType.MERGE)
     private Set<VendaEntity> vendaEntities;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    private UsuarioEntity usuarioEntity;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "clienteEntity", cascade = CascadeType.ALL)
+    private Set<AgendamentoEntity> agendamentoEntities;
 }

@@ -2,6 +2,7 @@ package br.com.integratefarma.fornecedor.entity;
 
 import br.com.integratefarma.produto.entity.ProdutoEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity(name = "tb_fornecedores")
 public class FornecedorEntity {
 

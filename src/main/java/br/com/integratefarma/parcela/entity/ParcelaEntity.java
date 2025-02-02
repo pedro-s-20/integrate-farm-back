@@ -2,6 +2,7 @@ package br.com.integratefarma.parcela.entity;
 
 import br.com.integratefarma.cliente.entity.ClienteEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity(name = "tb_fornecedores")
 public class ParcelaEntity {
 
@@ -39,7 +41,7 @@ public class ParcelaEntity {
     private Long numeroParcelas;
 
     @Column(name = "cliente_id", insertable= false, updatable=false)
-    private Long clienteId;
+    private Integer clienteId;
 
     @JsonIgnore
     @ManyToOne()
