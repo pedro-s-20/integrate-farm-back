@@ -1,8 +1,8 @@
 package br.com.integratefarma.usuario.entity;
 
-import br.com.integratefarma.prestadorservico.entity.PrestadorServicoEntity;
-import br.com.integratefarma.cliente.entity.ClienteEntity;
 import br.com.integratefarma.cargo.entity.CargoEntity;
+import br.com.integratefarma.cliente.entity.ClienteEntity;
+import br.com.integratefarma.prestadorservico.entity.PrestadorServicoEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

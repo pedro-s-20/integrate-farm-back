@@ -1,7 +1,7 @@
 package br.com.integratefarma.security.service;
 
-import br.com.integratefarma.usuario.service.UsuarioService;
 import br.com.integratefarma.usuario.entity.UsuarioEntity;
+import br.com.integratefarma.usuario.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
