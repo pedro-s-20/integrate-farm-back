@@ -110,11 +110,11 @@ public class AdministrativoService {
         return clienteService.getById(id);
     }
 
-    public PrestadorServicoCompletoDTO getMedicoById(Integer id) throws RegraDeNegocioException {
+    public PrestadorServicoCompletoDTO getPrestadorServicoById(Integer id) throws RegraDeNegocioException {
         return prestadorServicoService.getById(id);
     }
 
-    public void removerMedico(Integer id) throws RegraDeNegocioException {
+    public void removerPrestadorServico(Integer id) throws RegraDeNegocioException {
         prestadorServicoService.remover(id);
     }
 
@@ -122,14 +122,14 @@ public class AdministrativoService {
         clienteService.remover(id);
     }
 
-    public PageDTO<PrestadorServicoCompletoDTO> listMedico(Integer pagina, Integer tamanho){
+    public PageDTO<PrestadorServicoCompletoDTO> listPrestadorServico(Integer pagina, Integer tamanho){
         Pageable solicitacaoPagina = PageRequest.of(pagina,tamanho);
-        Page<PrestadorServicoCompletoDTO> medico = prestadorServicoRepository.listarFull(solicitacaoPagina);
-        List<PrestadorServicoCompletoDTO> prestadorServicoCompletoDTOS = medico.getContent().stream()
+        Page<PrestadorServicoCompletoDTO> prestador = prestadorServicoRepository.listarFull(solicitacaoPagina);
+        List<PrestadorServicoCompletoDTO> prestadorServicoCompletoDTOS = prestador.getContent().stream()
                 .toList();
 
-        return new PageDTO<>(medico.getTotalElements(),
-                medico.getTotalPages(),
+        return new PageDTO<>(prestador.getTotalElements(),
+                prestador.getTotalPages(),
                 pagina,
                 tamanho,
                 prestadorServicoCompletoDTOS);

@@ -51,45 +51,45 @@ public class PrestadorServicoService {
 
 
 
-    public PrestadorServicoCompletoDTO recuperarMedico() throws RegraDeNegocioException {
-        PrestadorServicoEntity prestadorServicoEntity = prestadorServicoRepository.getMedicoEntityByIdUsuario(usuarioService.getIdLoggedUser());
+    public PrestadorServicoCompletoDTO recuperarPrestadorServico() throws RegraDeNegocioException {
+        PrestadorServicoEntity prestadorServicoEntity = prestadorServicoRepository.getPrestadorServicoEntityByIdUsuario(usuarioService.getIdLoggedUser());
         return getById(prestadorServicoEntity.getIdPrestadorServico());
     }
 
-    public PrestadorServicoCompletoDTO getById(Integer idMedico) throws RegraDeNegocioException {
-        Optional<PrestadorServicoCompletoDTO> medicoRetornado = prestadorServicoRepository.getByIdPersonalizado(idMedico);
-        if (medicoRetornado.isEmpty()) {
+    public PrestadorServicoCompletoDTO getById(Integer idPrestadorServico) throws RegraDeNegocioException {
+        Optional<PrestadorServicoCompletoDTO> prestadorServicoRetornado = prestadorServicoRepository.getByIdPersonalizado(idPrestadorServico);
+        if (prestadorServicoRetornado.isEmpty()) {
             throw new RegraDeNegocioException("Usuário não encontrado.");
         }
-        return medicoRetornado.get();
+        return prestadorServicoRetornado.get();
     }
 
-    public PrestadorServicoEntity getMedico(Integer id) throws RegraDeNegocioException {
+    public PrestadorServicoEntity getPrestadorServico(Integer id) throws RegraDeNegocioException {
         return prestadorServicoRepository.findById(id)
-                .filter(medicoEntity -> medicoEntity.getUsuarioEntity().getAtivo().equals(1))
+                .filter(prestadorServicoEntity -> prestadorServicoEntity.getUsuarioEntity().getAtivo().equals(1))
                 .orElseThrow(() -> new RegraDeNegocioException("Prestador de Servico não existe!"));
     }
 
-    public AgendamentoListaDTO getMedicoAgentamentos() throws RegraDeNegocioException {
-        PrestadorServicoCompletoDTO prestadorServicoCompletoDTO = recuperarMedico();
-        AgendamentoPrestadorServicoRelatorioDTO agendamentoMedicoRelatorioDTO = agendamentoService.getRelatorioMedicoById(prestadorServicoCompletoDTO.getIdPrestadorServico());
+    public AgendamentoListaDTO getPrestadorServicoAgentamentos() throws RegraDeNegocioException {
+        PrestadorServicoCompletoDTO prestadorServicoCompletoDTO = recuperarPrestadorServico();
+        AgendamentoPrestadorServicoRelatorioDTO agendamentoPrestadorServicoRelatorioDTO = agendamentoService.getRelatorioPrestadorServicoById(prestadorServicoCompletoDTO.getIdPrestadorServico());
 
-        return objectMapper.convertValue(agendamentoMedicoRelatorioDTO, AgendamentoListaDTO.class);
+        return objectMapper.convertValue(agendamentoPrestadorServicoRelatorioDTO, AgendamentoListaDTO.class);
     }
 
-    public PrestadorServicoCompletoDTO adicionar(PrestadorServicoCreateDTO medico) throws RegraDeNegocioException {
-        checarSeTemNumero(medico.getNome());
+    public PrestadorServicoCompletoDTO adicionar(PrestadorServicoCreateDTO prestadorServico) throws RegraDeNegocioException {
+        checarSeTemNumero(prestadorServico.getNome());
 
-        UsuarioEntity usuarioEntity = objectMapper.convertValue(medico, UsuarioEntity.class);
+        UsuarioEntity usuarioEntity = objectMapper.convertValue(prestadorServico, UsuarioEntity.class);
         usuarioEntity.setIdCargo(2);
 
-        // Adicionando o usuario que foi salvado no Medico a salvar
-        PrestadorServicoEntity prestadorServicoEntity = objectMapper.convertValue(medico, PrestadorServicoEntity.class);
+        // Adicionando o usuario que foi salvado no PrestadorServico a salvar
+        PrestadorServicoEntity prestadorServicoEntity = objectMapper.convertValue(prestadorServico, PrestadorServicoEntity.class);
         usuarioEntity.setPrestadorServicoEntity(prestadorServicoEntity);
         prestadorServicoEntity.setUsuarioEntity(usuarioEntity);
 
-        // Adicionando Convenio em Medico a salvar
-        prestadorServicoEntity.setEspecialidadeEntity(especialidadeService.getEspecialidade(medico.getIdEspecialidade()));
+        // Adicionando Convenio em PrestadorServico a salvar
+        prestadorServicoEntity.setEspecialidadeEntity(especialidadeService.getEspecialidade(prestadorServico.getIdEspecialidade()));
 
         usuarioService.validarUsuarioAdicionado(usuarioEntity);
         usuarioService.adicionar(usuarioEntity);
@@ -105,23 +105,23 @@ public class PrestadorServicoService {
         return getById(prestadorServicoEntity.getIdPrestadorServico());
     }
 
-    public PrestadorServicoCompletoDTO editar(PrestadorServicoUpdateDTO medico) throws RegraDeNegocioException {
-        PrestadorServicoEntity prestadorServicoEntity = objectMapper.convertValue(recuperarMedico(), PrestadorServicoEntity.class);
+    public PrestadorServicoCompletoDTO editar(PrestadorServicoUpdateDTO prestadorServico) throws RegraDeNegocioException {
+        PrestadorServicoEntity prestadorServicoEntity = objectMapper.convertValue(recuperarPrestadorServico(), PrestadorServicoEntity.class);
 
-        prestadorServicoEntity.setCrm(medico.getCrm());
-        prestadorServicoEntity.setEspecialidadeEntity(especialidadeService.getEspecialidade(medico.getIdEspecialidade()));
+        prestadorServicoEntity.setCrm(prestadorServico.getCrm());
+        prestadorServicoEntity.setEspecialidadeEntity(especialidadeService.getEspecialidade(prestadorServico.getIdEspecialidade()));
         prestadorServicoEntity.setUsuarioEntity(usuarioService.getUsuario(prestadorServicoEntity.getIdUsuario()));
 
-        checarSeTemNumero(medico.getNome());
+        checarSeTemNumero(prestadorServico.getNome());
 
-        UsuarioCreateDTO usuarioCreateDTO = objectMapper.convertValue(medico, UsuarioCreateDTO.class);
+        UsuarioCreateDTO usuarioCreateDTO = objectMapper.convertValue(prestadorServico, UsuarioCreateDTO.class);
 
-        List<PrestadorServicoEntity> listaMedico = prestadorServicoRepository.findAll().stream()
-                .filter(medicoEntity1 -> !medicoEntity1.getCrm().equals(medico.getCrm()))
+        List<PrestadorServicoEntity> listaPrestadorServico = prestadorServicoRepository.findAll().stream()
+                .filter(prestadorServicoEntity1 -> !prestadorServicoEntity1.getCrm().equals(prestadorServico.getCrm()))
                 .toList();
 
-        for (PrestadorServicoEntity medicoVerificarCRM : listaMedico) {
-            if (medico.getCrm().equals(medicoVerificarCRM.getCrm())) {
+        for (PrestadorServicoEntity prestadorServicoVerificarCRM : listaPrestadorServico) {
+            if (prestadorServico.getCrm().equals(prestadorServicoVerificarCRM.getCrm())) {
                 throw new RegraDeNegocioException("CRM já existe!");
             }
         }
@@ -129,16 +129,16 @@ public class PrestadorServicoService {
         usuarioService.validarUsuarioEditado(usuarioCreateDTO, prestadorServicoEntity.getIdUsuario());
         usuarioService.editar(usuarioCreateDTO, prestadorServicoEntity.getIdUsuario());
 
-        PrestadorServicoEntity medicoEditado = prestadorServicoRepository.save(prestadorServicoEntity);
+        PrestadorServicoEntity prestadorServicoEditado = prestadorServicoRepository.save(prestadorServicoEntity);
 
-        return getById(medicoEditado.getIdPrestadorServico());
+        return getById(prestadorServicoEditado.getIdPrestadorServico());
     }
 
     @Transactional
     public void remover(Integer id) throws RegraDeNegocioException {
-        PrestadorServicoEntity prestadorServicoEntity = getMedico(id);
+        PrestadorServicoEntity prestadorServicoEntity = getPrestadorServico(id);
         usuarioService.remover(prestadorServicoEntity.getIdUsuario());
-        agendamentoService.removerPorMedicoDesativado(prestadorServicoEntity);
+        agendamentoService.removerPorPrestadorServicoDesativado(prestadorServicoEntity);
     }
 
     public void checarSeTemNumero(String string) throws RegraDeNegocioException {

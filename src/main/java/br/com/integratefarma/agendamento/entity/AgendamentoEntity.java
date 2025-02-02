@@ -26,8 +26,8 @@ public class AgendamentoEntity {
     private Integer idAgendamento;
     @Column(name = "id_cliente", insertable = false, updatable = false)
     private Integer idCliente;
-    @Column(name = "id_medico", insertable = false, updatable = false)
-    private Integer idMedico;
+    @Column(name = "id_prestador_servico", insertable = false, updatable = false)
+    private Integer idPrestadorServico;
     @Column(name = "tratamento")
     private String tratamento;
     @Column(name = "exame")
@@ -39,7 +39,7 @@ public class AgendamentoEntity {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private ClienteEntity clienteEntity;
 
     @JsonIgnore

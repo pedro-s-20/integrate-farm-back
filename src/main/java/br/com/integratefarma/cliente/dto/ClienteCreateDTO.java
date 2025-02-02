@@ -12,9 +12,6 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 public class ClienteCreateDTO {
 
-    @Schema(description = "Id do Convenio",example = "1", required = true)
-    private Integer idConvenio;
-
     @NotBlank
     @Size(min = 11, max = 11)
     @Schema(description = "CPF", example = "12345678911", required = true)

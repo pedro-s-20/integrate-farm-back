@@ -17,8 +17,6 @@ public interface ClienteRepository extends JpaRepository<ClienteEntity, Long> {
     @Query("select new br.com.integratefarma.cliente.dto.ClienteCompletoDTO(" +
             "c.id, " +
             "c.idUsuario, " +
-            "con.cadastroOrgaoRegulador, " +
-            "con.taxaAbatimento, " +
             "u.cpf, " +
             "u.email, " +
             "u.nome, " +
@@ -37,8 +35,6 @@ public interface ClienteRepository extends JpaRepository<ClienteEntity, Long> {
     @Query("select new br.com.integratefarma.cliente.dto.ClienteCompletoDTO(" +
             "c.id, " +
             "c.idUsuario, " +
-            "con.cadastroOrgaoRegulador, " +
-            "con.taxaAbatimento, " +
             "u.cpf, " +
             "u.email, " +
             "u.nome, " +

@@ -29,18 +29,18 @@ public class PrestadorServicoController implements DocumentacaoPrestadorServico<
     @Override
     @GetMapping("/verificar-info")
     public ResponseEntity<PrestadorServicoCompletoDTO> recuperarCliente() throws RegraDeNegocioException {
-        return new ResponseEntity<>(prestadorServicoService.recuperarMedico(), HttpStatus.OK);
+        return new ResponseEntity<>(prestadorServicoService.recuperarPrestadorServico(), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<AgendamentoListaDTO> getClienteAgentamentos() throws RegraDeNegocioException {
-        return new ResponseEntity<>(prestadorServicoService.getMedicoAgentamentos(), HttpStatus.OK);
+        return new ResponseEntity<>(prestadorServicoService.getPrestadorServicoAgentamentos(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<PrestadorServicoCompletoDTO> update(PrestadorServicoUpdateDTO medico) throws RegraDeNegocioException {
-        PrestadorServicoCompletoDTO medicoAtualizado = prestadorServicoService.editar(medico);
-        return new ResponseEntity<>(medicoAtualizado, HttpStatus.OK);
+    public ResponseEntity<PrestadorServicoCompletoDTO> update(PrestadorServicoUpdateDTO prestadorServico) throws RegraDeNegocioException {
+        PrestadorServicoCompletoDTO prestadorServicoAtualizado = prestadorServicoService.editar(prestadorServico);
+        return new ResponseEntity<>(prestadorServicoAtualizado, HttpStatus.OK);
     }
 
 

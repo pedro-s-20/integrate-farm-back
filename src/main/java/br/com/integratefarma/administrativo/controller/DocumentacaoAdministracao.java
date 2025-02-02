@@ -40,16 +40,16 @@ public interface DocumentacaoAdministracao {
     @GetMapping("/cliente/{id}")
     ResponseEntity<ClienteCompletoDTO> getByIdCliente(Integer id) throws RegraDeNegocioException;
 
-    @Operation(summary = "Recuperar um Médico", description = "Recupera um Médico passando seu ID")
+    @Operation(summary = "Recuperar um Prestador de Serviço", description = "Recupera um Prestador de Serviço passando seu ID")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "O Médico foi recuperado com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "O Prestador de Serviço foi recuperado com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @GetMapping("/medico/{id}")
-    ResponseEntity<PrestadorServicoCompletoDTO> getByIdMedico(Integer id) throws RegraDeNegocioException;
+    @GetMapping("/prestador-servico/{id}")
+    ResponseEntity<PrestadorServicoCompletoDTO> getByIdPrestadorServico(Integer id) throws RegraDeNegocioException;
 
     @Operation(summary = "Lista todos os administradores", description = "Lista todos os administradores")
     @ApiResponses(
@@ -62,16 +62,16 @@ public interface DocumentacaoAdministracao {
     @GetMapping("/listar-administradores")
     ResponseEntity<List<UsuarioDTO>> list() throws RegraDeNegocioException;
 
-    @Operation(summary = "Desativa um Médico", description = "Desativa um Médico passando seu ID")
+    @Operation(summary = "Desativa um Prestador de Serviço", description = "Desativa um Prestador de Serviço passando seu ID")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "O Médico foi desativado com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "O Prestador de Serviço foi desativado com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @DeleteMapping("/desativar-medico/{id}")
-    ResponseEntity<Void> deleteMedico(Integer id) throws RegraDeNegocioException;
+    @DeleteMapping("/desativar-prestador-servico/{id}")
+    ResponseEntity<Void> deletePrestadorServico(Integer id) throws RegraDeNegocioException;
 
 
     @Operation(summary = "Desativa um Cliente", description = "Desativa um Cliente passando seu ID")
@@ -122,16 +122,16 @@ public interface DocumentacaoAdministracao {
     ResponseEntity<Void> remove(Integer id) throws RegraDeNegocioException;
 
 
-    @Operation(summary = "Lista todos os Médicos", description = "Lista todos os Médicos de forma paginada")
+    @Operation(summary = "Lista todos os prestadores de servico", description = "Lista todos os prestadores de servico de forma paginada")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Os Médicos foram listados com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "Os prestadores de servico foram listados com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @GetMapping("/paginado-medico/")
-    ResponseEntity<PageDTO<PrestadorServicoCompletoDTO>> paginadoMedico(Integer pagina, Integer tamanho);
+    @GetMapping("/paginado-prestador-servico/")
+    ResponseEntity<PageDTO<PrestadorServicoCompletoDTO>> paginadoPrestadorServico(Integer pagina, Integer tamanho);
 
 
     @Operation(summary = "Lista todos os Clientes", description = "Lista todos os Clientes de forma paginada")

@@ -40,7 +40,7 @@ public class ProdutoEntity {
 
     @JsonIgnore
     @ManyToOne()
-    @JoinColumn(name = "for_id", referencedColumnName = "for_id")
+    @JoinColumn(name = "for_id", referencedColumnName = "id")
     private FornecedorEntity fornecedorEntity;
 
     @JsonIgnore

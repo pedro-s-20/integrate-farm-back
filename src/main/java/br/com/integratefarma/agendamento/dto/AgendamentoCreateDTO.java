@@ -18,13 +18,13 @@ public class AgendamentoCreateDTO {
     @Schema(description = "Id do cliente", example = "1", required = true)
     private Integer idCliente;
     @NotNull
-    @Schema(description = "Id do médico", example = "2", required = true)
-    private Integer idMedico;
+    @Schema(description = "Id do prestador de serviço", example = "2", required = true)
+    private Integer idPrestadorServico;
     @Size(max = 40)
     @Schema(description = "Tratamento a ser seguido pelo cliente", example = "Dipirona de 6 em 6 horas")
     private String tratamento;
     @Size(max = 40)
-    @Schema(description = "Exame(s) pedidos pelo médico", example = "Sangue e urina")
+    @Schema(description = "Exame(s) pedidos pelo prestador de serviço", example = "Sangue e urina")
     private String exame;
     @NotNull
     @Schema(description = "Data e horário da consulta", example = "25/08/2023 15:00", required = true)

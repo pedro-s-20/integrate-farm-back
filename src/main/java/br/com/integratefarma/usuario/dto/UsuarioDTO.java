@@ -23,6 +23,6 @@ public class UsuarioDTO {
     private Integer numero;
     @Schema(description = "Número de telefone ou celular", example = "84261850")
     private String contatos;
-    @Schema(description = "Indentificar se o usuário é um médico ou um cliente", example = "1")
+    @Schema(description = "Indentificar se o usuário é um prestador de serviço ou um cliente", example = "1")
     private Integer idCargo;
 }

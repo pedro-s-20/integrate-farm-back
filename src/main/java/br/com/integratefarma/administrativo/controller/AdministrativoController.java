@@ -38,8 +38,8 @@ public class AdministrativoController implements DocumentacaoAdministracao {
     }
 
     @Override
-    public ResponseEntity<PrestadorServicoCompletoDTO> getByIdMedico(Integer id) throws RegraDeNegocioException {
-        return new ResponseEntity<>(administrativoService.getMedicoById(id), HttpStatus.OK);
+    public ResponseEntity<PrestadorServicoCompletoDTO> getByIdPrestadorServico(Integer id) throws RegraDeNegocioException {
+        return new ResponseEntity<>(administrativoService.getPrestadorServicoById(id), HttpStatus.OK);
     }
     @Override
     public ResponseEntity<List<UsuarioDTO>> list() throws RegraDeNegocioException{
@@ -47,8 +47,8 @@ public class AdministrativoController implements DocumentacaoAdministracao {
     }
 
     @Override
-    public ResponseEntity<Void> deleteMedico(Integer id) throws RegraDeNegocioException {
-        administrativoService.removerMedico(id);
+    public ResponseEntity<Void> deletePrestadorServico(Integer id) throws RegraDeNegocioException {
+        administrativoService.removerPrestadorServico(id);
         return ResponseEntity.ok().build();
     }
     @Override
@@ -74,8 +74,8 @@ public class AdministrativoController implements DocumentacaoAdministracao {
         return ResponseEntity.ok().build();
     }
     @Override
-    public ResponseEntity<PageDTO<PrestadorServicoCompletoDTO>> paginadoMedico(Integer pagina, Integer tamanho){
-        return new ResponseEntity<>(administrativoService.listMedico(pagina,tamanho),HttpStatus.OK);
+    public ResponseEntity<PageDTO<PrestadorServicoCompletoDTO>> paginadoPrestadorServico(Integer pagina, Integer tamanho){
+        return new ResponseEntity<>(administrativoService.listPrestadorServico(pagina,tamanho),HttpStatus.OK);
     }
     @Override
     public ResponseEntity<PageDTO<ClienteCompletoDTO>> paginadoCliente(Integer pagina, Integer tamanho){

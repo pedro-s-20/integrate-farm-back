@@ -13,7 +13,7 @@ public class AgendamentoDTO {
 
     private Integer idAgendamento;
     private Integer idCliente;
-    private Integer idMedico;
+    private Integer idPrestadorServico;
     private String tratamento;
     private String exame;
     private LocalDateTime dataHorario;

@@ -62,5 +62,5 @@ public interface PrestadorServicoRepository extends JpaRepository<PrestadorServi
     @Query("SELECT m from PRESTADOR_SERVICO m where m.idPrestadorServico = :id and m.usuarioEntity.ativo = 1")
     Optional<PrestadorServicoEntity> findById(Integer id);
 
-    PrestadorServicoEntity getMedicoEntityByIdUsuario(Integer idLoggedUser);
+    PrestadorServicoEntity getPrestadorServicoEntityByIdUsuario(Integer idLoggedUser);
 }

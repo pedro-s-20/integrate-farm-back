@@ -41,7 +41,7 @@ public class VendaEntity {
 
     @JsonIgnore
     @ManyToOne()
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private ClienteEntity clienteEntity;
 
     @JsonIgnore

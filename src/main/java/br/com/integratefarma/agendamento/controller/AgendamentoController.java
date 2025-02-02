@@ -41,8 +41,8 @@ public class AgendamentoController implements DocumentacaoAgendamento<Agendament
     }
 
     @Override
-    public ResponseEntity<AgendamentoPrestadorServicoRelatorioDTO> getMedicoByIdPersonalizado(@PathVariable("idMedico") Integer idMedico) throws RegraDeNegocioException {
-        return new ResponseEntity<>(agendamentoService.getRelatorioMedicoById(idMedico), HttpStatus.OK);
+    public ResponseEntity<AgendamentoPrestadorServicoRelatorioDTO> getPrestadorServicoByIdPersonalizado(@PathVariable("idPrestadorServico") Integer idPrestadorServico) throws RegraDeNegocioException {
+        return new ResponseEntity<>(agendamentoService.getRelatorioPrestadorServicoById(idPrestadorServico), HttpStatus.OK);
     }
 
     @Override

@@ -38,7 +38,7 @@ public class AgendamentoService {
 
     public AgendamentoDTO adicionar(AgendamentoCreateDTO agendamentoCreateDTO) throws RegraDeNegocioException {
         ClienteEntity clienteEntity = clienteService.getCliente(agendamentoCreateDTO.getIdCliente());
-        PrestadorServicoEntity prestadorServicoEntity = prestadorServicoService.getMedico(agendamentoCreateDTO.getIdMedico());
+        PrestadorServicoEntity prestadorServicoEntity = prestadorServicoService.getPrestadorServico(agendamentoCreateDTO.getIdPrestadorServico());
 
         AgendamentoEntity agendamentoEntity = objectMapper.convertValue(agendamentoCreateDTO, AgendamentoEntity.class);
 
@@ -59,7 +59,7 @@ public class AgendamentoService {
     public AgendamentoDTO editar(Integer id, AgendamentoCreateDTO agendamentoCreateDTO) throws RegraDeNegocioException {
         AgendamentoEntity agendamentoEntity = getAgendamento(id);
         ClienteEntity clienteEntity = clienteService.getCliente(agendamentoCreateDTO.getIdCliente());
-        PrestadorServicoEntity prestadorServicoEntity = prestadorServicoService.getMedico(agendamentoCreateDTO.getIdMedico());
+        PrestadorServicoEntity prestadorServicoEntity = prestadorServicoService.getPrestadorServico(agendamentoCreateDTO.getIdPrestadorServico());
 
         agendamentoEntity.setPrestadorServicoEntity(prestadorServicoEntity);
         agendamentoEntity.setClienteEntity(clienteEntity);
@@ -90,8 +90,8 @@ public class AgendamentoService {
         agendamentoRepository.delete(agendamentoEntity);
     }
 
-    public void removerPorMedicoDesativado(PrestadorServicoEntity prestadorServicoEntity) throws RegraDeNegocioException {
-        agendamentoRepository.deleteByMedicoEntity(prestadorServicoEntity);
+    public void removerPorPrestadorServicoDesativado(PrestadorServicoEntity prestadorServicoEntity) throws RegraDeNegocioException {
+        agendamentoRepository.deleteByPrestadorServicoEntity(prestadorServicoEntity);
     }
 
     public void removerPorClienteDesativado(ClienteEntity clienteEntity) throws RegraDeNegocioException {
@@ -122,16 +122,16 @@ public class AgendamentoService {
         return agendamentoRelatorio;
     }
 
-    public AgendamentoPrestadorServicoRelatorioDTO getRelatorioMedicoById(Integer idMedico) throws RegraDeNegocioException {
-        AgendamentoPrestadorServicoRelatorioDTO agendamentoRelatorio = objectMapper.convertValue(prestadorServicoService.getById(idMedico), AgendamentoPrestadorServicoRelatorioDTO.class);
+    public AgendamentoPrestadorServicoRelatorioDTO getRelatorioPrestadorServicoById(Integer idPrestadorServico) throws RegraDeNegocioException {
+        AgendamentoPrestadorServicoRelatorioDTO agendamentoRelatorio = objectMapper.convertValue(prestadorServicoService.getById(idPrestadorServico), AgendamentoPrestadorServicoRelatorioDTO.class);
 
-        List<AgendamentoDTO> allByIdMedico = agendamentoRepository.findAllByIdMedico(idMedico).stream()
+        List<AgendamentoDTO> allByIdPrestadorServico = agendamentoRepository.findAllByIdPrestadorServico(idPrestadorServico).stream()
                 .map(agendamentoEntity -> objectMapper.convertValue(agendamentoEntity, AgendamentoDTO.class))
                 .toList();
-        agendamentoRelatorio.setAgendamentoDTOList(allByIdMedico);
+        agendamentoRelatorio.setAgendamentoDTOList(allByIdPrestadorServico);
 
-        if (allByIdMedico.isEmpty()) {
-            throw new RegraDeNegocioException("Esse médico não possui agendamento");
+        if (allByIdPrestadorServico.isEmpty()) {
+            throw new RegraDeNegocioException("Esse prestador de serviço não possui agendamento");
         }
 
         return agendamentoRelatorio;

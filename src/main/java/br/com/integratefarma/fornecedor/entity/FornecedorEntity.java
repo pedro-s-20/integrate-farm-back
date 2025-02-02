@@ -61,6 +61,6 @@ public class FornecedorEntity {
     private String estado;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "produtoEntity", cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fornecedorEntity", cascade = CascadeType.MERGE)
     private Set<ProdutoEntity> produtoEntities;
 }

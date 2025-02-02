@@ -39,11 +39,11 @@ public class ItemVendaEntity {
 
     @JsonIgnore
     @ManyToOne()
-    @JoinColumn(name = "venda_id", referencedColumnName = "venda_id")
+    @JoinColumn(name = "venda_id", referencedColumnName = "id")
     private VendaEntity vendaEntity;
 
     @JsonIgnore
     @ManyToOne()
-    @JoinColumn(name = "produto_id", referencedColumnName = "produto_id")
+    @JoinColumn(name = "produto_id", referencedColumnName = "id")
     private ProdutoEntity produtoEntity;
 }

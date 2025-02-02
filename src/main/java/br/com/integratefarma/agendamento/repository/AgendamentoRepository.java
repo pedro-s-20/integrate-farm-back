@@ -13,10 +13,10 @@ public interface AgendamentoRepository extends JpaRepository<AgendamentoEntity, 
 
     List<AgendamentoEntity> findAllByIdCliente(Integer id);
 
-    List<AgendamentoEntity> findAllByIdMedico(Integer id);
+    List<AgendamentoEntity> findAllByIdPrestadorServico(Integer id);
 
     
-    void deleteByMedicoEntity(PrestadorServicoEntity prestadorServicoEntity);
+    void deleteByPrestadorServicoEntity(PrestadorServicoEntity prestadorServicoEntity);
 
     void deleteByClienteEntity(ClienteEntity clienteEntity);
 }

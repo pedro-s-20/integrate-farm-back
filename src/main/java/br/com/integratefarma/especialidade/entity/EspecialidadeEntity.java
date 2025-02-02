@@ -29,6 +29,6 @@ public class EspecialidadeEntity {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "especialidadeEntity", cascade = CascadeType.MERGE)
-    private Set<PrestadorServicoEntity> medicoEntities;
+    private Set<PrestadorServicoEntity> prestadorServicoEntities;
 
 }

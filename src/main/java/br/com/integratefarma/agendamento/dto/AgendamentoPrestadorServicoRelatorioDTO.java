@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AgendamentoPrestadorServicoRelatorioDTO extends PrestadorServicoCompletoDTO {
 
-    private Integer idMedico;
+    private Integer idPrestadorServico;
     private String crm;
     private Integer idEspecialidade;
     private Integer idUsuario;
@@ -28,8 +28,8 @@ public class AgendamentoPrestadorServicoRelatorioDTO extends PrestadorServicoCom
 
     private List<AgendamentoDTO> agendamentoDTOList;
 
-    public AgendamentoPrestadorServicoRelatorioDTO(Integer idMedico, String crm, Integer idEspecialidade, Integer idUsuario, Double valor, String nomeEspecilidade, String cpf, String email, String nome, String nomeCargo, String contatos, String cep, Integer numero) {
-        this.idMedico = idMedico;
+    public AgendamentoPrestadorServicoRelatorioDTO(Integer idPrestadorServico, String crm, Integer idEspecialidade, Integer idUsuario, Double valor, String nomeEspecilidade, String cpf, String email, String nome, String nomeCargo, String contatos, String cep, Integer numero) {
+        this.idPrestadorServico = idPrestadorServico;
         this.crm = crm;
         this.idEspecialidade = idEspecialidade;
         this.idUsuario = idUsuario;

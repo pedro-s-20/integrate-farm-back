@@ -51,13 +51,13 @@ public interface DocumentacaoAgendamento<AgendamentoDTO, entrada, id, numero2> {
     @Operation(summary = "Recuperar um Agendamentos", description = "Lista um Agendamentos passando seu ID")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "O Agendamentos foi lsitado com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "O Agendamentos foi listado com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @GetMapping("/{idMedico}/relatorio-medico")
-    ResponseEntity<AgendamentoPrestadorServicoRelatorioDTO> getMedicoByIdPersonalizado(@PathVariable("idMedico") id idMedico) throws RegraDeNegocioException;
+    @GetMapping("/{idPrestadorServico}/relatorio-prestador-servico")
+    ResponseEntity<AgendamentoPrestadorServicoRelatorioDTO> getPrestadorServicoByIdPersonalizado(@PathVariable("idPrestadorServico") id idPrestadorServico) throws RegraDeNegocioException;
 
     @Operation(summary = "Criar Agendamentos", description = "Cria um Agendamentos")
     @ApiResponses(

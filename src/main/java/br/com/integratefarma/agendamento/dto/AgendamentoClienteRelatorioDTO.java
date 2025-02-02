@@ -12,7 +12,6 @@ import java.util.List;
 public class AgendamentoClienteRelatorioDTO {
 
     private Integer idCliente;
-    private Integer idConvenio;
     private Integer idUsuario;
     private String cadastroOrgaoRegulador;
     private Double taxaAbatimento;
@@ -25,9 +24,8 @@ public class AgendamentoClienteRelatorioDTO {
     private Integer numero;
     private List<AgendamentoDTO> agendamentoDTOList;
 
-    public AgendamentoClienteRelatorioDTO(Integer idCliente, Integer idConvenio, Integer idUsuario, String cadastroOrgaoRegulador, Double taxaAbatimento, String cpf, String email, String nome, String nomeCargo, String contatos, String cep, Integer numero) {
+    public AgendamentoClienteRelatorioDTO(Integer idCliente, Integer idUsuario, String cadastroOrgaoRegulador, Double taxaAbatimento, String cpf, String email, String nome, String nomeCargo, String contatos, String cep, Integer numero) {
         this.idCliente = idCliente;
-        this.idConvenio = idConvenio;
         this.idUsuario = idUsuario;
         this.cadastroOrgaoRegulador = cadastroOrgaoRegulador;
         this.taxaAbatimento = taxaAbatimento;

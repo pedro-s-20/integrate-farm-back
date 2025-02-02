@@ -11,10 +11,7 @@ import lombok.NoArgsConstructor;
 public class ClienteCompletoDTO {
 
     private Integer idCliente;
-    private Integer idConvenio;
     private Integer idUsuario;
-    private String cadastroOrgaoRegulador;
-    private Double taxaAbatimento;
     private String cpf;
     private String email;
     private String nome;
