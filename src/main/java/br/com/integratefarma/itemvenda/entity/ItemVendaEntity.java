@@ -1,5 +1,8 @@
 package br.com.integratefarma.itemvenda.entity;
 
+import br.com.integratefarma.produto.entity.ProdutoEntity;
+import br.com.integratefarma.venda.entity.VendaEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,4 +34,14 @@ public class ItemVendaEntity {
 
     @Column(name = "subtotal")
     private BigDecimal subtotal;
+
+    @JsonIgnore
+    @ManyToOne()
+    @JoinColumn(name = "venda_id", referencedColumnName = "venda_id")
+    private VendaEntity vendaEntity;
+
+    @JsonIgnore
+    @ManyToOne()
+    @JoinColumn(name = "produto_id", referencedColumnName = "produto_id")
+    private ProdutoEntity produtoEntity;
 }

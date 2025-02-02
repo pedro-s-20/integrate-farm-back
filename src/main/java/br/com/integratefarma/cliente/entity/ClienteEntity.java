@@ -1,11 +1,15 @@
 package br.com.integratefarma.cliente.entity;
 
+import br.com.integratefarma.parcela.entity.ParcelaEntity;
+import br.com.integratefarma.venda.entity.VendaEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -57,4 +61,12 @@ public class ClienteEntity {
 
     @Column(name = "estado")
     private String estado;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "clienteEntity", cascade = CascadeType.MERGE)
+    private Set<ParcelaEntity> parcelaEntities;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "clienteEntity", cascade = CascadeType.MERGE)
+    private Set<VendaEntity> vendaEntities;
 }

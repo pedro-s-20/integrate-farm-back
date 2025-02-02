@@ -1,5 +1,7 @@
 package br.com.integratefarma.parcela.entity;
 
+import br.com.integratefarma.cliente.entity.ClienteEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,4 +40,9 @@ public class ParcelaEntity {
 
     @Column(name = "cliente_id", insertable= false, updatable=false)
     private Long clienteId;
+
+    @JsonIgnore
+    @ManyToOne()
+    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
+    private ClienteEntity clienteEntity;
 }
