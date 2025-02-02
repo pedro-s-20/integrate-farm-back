@@ -1,4 +1,4 @@
-package br.com.integratefarma.cliente.dto;
+package br.com.integratefarma.fornecedor.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClienteDTO {
+public class FornecedorDTO {
     private Long id;
     private String nome;
-    private String rg;
-    private String cpf;
+    private String cnpj;
     private String email;
     private String telefone;
     private String celular;

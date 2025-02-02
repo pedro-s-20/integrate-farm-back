@@ -1,4 +1,4 @@
-package br.com.integratefarma.cliente.entity;
+package br.com.integratefarma.funcionario.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,8 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "tb_clientes")
-public class ClienteEntity {
+@Entity(name = "tb_funcionarios")
+public class FuncionarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +30,15 @@ public class ClienteEntity {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "senha")
+    private String senha;
+
+    @Column(name = "cargo")
+    private String cargo;
+
+    @Column(name = "nivel_acesso")
+    private String nivelAcesso;
 
     @Column(name = "telefone")
     private String telefone;

@@ -1,18 +1,22 @@
-package br.com.integratefarma.cliente.dto;
+package br.com.integratefarma.funcionario.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClienteDTO {
+public class FuncionarioDTO {
     private Long id;
     private String nome;
     private String rg;
     private String cpf;
     private String email;
+    private String senha;
+    private String cargo;
+    private String nivelAcesso;
     private String telefone;
     private String celular;
     private String cep;
