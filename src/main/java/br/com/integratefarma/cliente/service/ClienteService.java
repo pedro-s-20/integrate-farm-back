@@ -80,6 +80,11 @@ public class ClienteService {
         // Adicionando o usuario que foi salvado no Cliente a salvar
         ClienteEntity clienteEntity = objectMapper.convertValue(cliente, ClienteEntity.class);
         clienteEntity.setUsuarioEntity(usuarioEntity);
+        String[] numeros = cliente.getContatos().split(",");
+        if (numeros.length > 0) {
+            if(numeros[0] != null) clienteEntity.setCelular(numeros[0]);
+            if(numeros[1] != null) clienteEntity.setTelefone(numeros[1]);
+        }
 
         clienteRepository.save(clienteEntity);
         try{
