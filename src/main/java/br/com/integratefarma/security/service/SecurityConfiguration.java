@@ -28,9 +28,9 @@ public class SecurityConfiguration {
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
 //                        .antMatchers("/auth/**").permitAll() // comentar essa linha
-                                .antMatchers("/administrativo/**", "/agendamento/**", "/especialidade/**").hasRole("ADM")
-                                .antMatchers("/cliente/**", "/agendamento/**", "venda").hasRole("CLIENTE")
-                                .antMatchers("/prestador-servico/**").hasRole("PRESTADOR")
+                                .antMatchers("/administrativo/**", "/produto/**", "/agendamento/**", "/especialidade/**").hasRole("ADM")
+                                .antMatchers("/cliente/**", "/agendamento/**", "/produto/**", "venda").hasRole("CLIENTE")
+                                .antMatchers("/prestador-servico/**", "/produto/**").hasRole("PRESTADOR")
                         .anyRequest().authenticated()
                 );
 

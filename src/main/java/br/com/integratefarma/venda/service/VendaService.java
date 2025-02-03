@@ -5,14 +5,16 @@ import br.com.integratefarma.itemvenda.repository.ItemVendaRepository;
 import br.com.integratefarma.parcela.entity.ParcelaEntity;
 import br.com.integratefarma.parcela.repository.ParcelaRepository;
 import br.com.integratefarma.produto.entity.ProdutoEntity;
-import br.com.integratefarma.venda.dto.*;
+import br.com.integratefarma.venda.dto.ProdutoQuantidadeDTO;
+import br.com.integratefarma.venda.dto.ProdutosVendaOutputDTO;
+import br.com.integratefarma.venda.dto.VendaCreateDTO;
+import br.com.integratefarma.venda.dto.VendaDTO;
 import br.com.integratefarma.venda.entity.VendaEntity;
 import br.com.integratefarma.venda.repository.VendaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

@@ -4,14 +4,17 @@ import br.com.integratefarma.agendamento.dto.AgendamentoListaDTO;
 import br.com.integratefarma.cliente.dto.ClienteCompletoDTO;
 import br.com.integratefarma.cliente.dto.ClienteUpdateDTO;
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
+import br.com.integratefarma.venda.dto.VendaCreateDTO;
 import br.com.integratefarma.venda.dto.VendaDTO;
 import br.com.integratefarma.venda.dto.VendaListaDTO;
-import br.com.integratefarma.venda.dto.VendaCreateDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 
