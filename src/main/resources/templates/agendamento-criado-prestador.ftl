@@ -19,6 +19,7 @@
                         <strong>ID do agendamento: ${agendamento.getIdAgendamento()}</strong><br>
                         <strong>Data e horário: ${agendamento.getDataHorario()} <strong>
                         Paciente a ser atendido: ${agendamento.getClienteEntity().getUsuarioEntity().getNome()} <br>
+                        Status: ${agendamento.getStatus()} <br>
                         Qualquer dúvida é só contatar o suporte pelo e-mail ${email}<br>
                         Att,<br>
                         Integrate Farm Corp.<br>

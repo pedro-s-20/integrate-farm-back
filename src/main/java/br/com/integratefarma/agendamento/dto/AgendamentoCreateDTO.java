@@ -29,6 +29,8 @@ public class AgendamentoCreateDTO {
     @NotNull
     @Schema(description = "Data e horário da consulta", example = "25/08/2023 15:00", required = true)
     private LocalDateTime dataHorario;
-
-
+    @NotNull
+    @Size(max = 40)
+    @Schema(description = "Status do agendamento", example = "PENDENTE, IMPEDIMENTO, CONFIRMADO ou FINALIZADO", required = true)
+    private String status;
 }

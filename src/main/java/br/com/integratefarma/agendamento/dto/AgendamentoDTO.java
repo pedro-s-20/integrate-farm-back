@@ -18,4 +18,5 @@ public class AgendamentoDTO {
     private String exame;
     private LocalDateTime dataHorario;
     private Double valorAgendamento;
+    private String status;
 }

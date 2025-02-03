@@ -19,6 +19,10 @@
                         <strong>ID do agendamento: ${agendamento.getIdAgendamento()}</strong><br>
                         <strong>Data e horário: ${agendamento.getDataHorario()} <strong>
                         Prestador de serviço que lhe atenderá: ${agendamento.getPrestadorServicoEntity().getUsuarioEntity().getNome()} <br>
+                        Status: ${agendamento.getStatus()} <br>
+                        <em><strong>OBS.:</strong> Caso o agendamento esteja PENDENTE,
+                        algum de nossos colaboradores irá avaliar a disponibilidade do prestador de serviço e confirmará ou não o atendimento.<br>
+                        Fique tranquilo, avisaremos qualquer atualização! ;)</em>
                         Qualquer dúvida é só contatar o suporte pelo e-mail ${email}<br>
                         Att,<br>
                         Integrate Farm Corp.<br>

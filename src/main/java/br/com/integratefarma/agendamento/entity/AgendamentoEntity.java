@@ -36,6 +36,8 @@ public class AgendamentoEntity {
     private LocalDateTime dataHorario;
     @Column(name = "valor")
     private Double valorAgendamento;
+    @Column(name = "status")
+    private String status;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})

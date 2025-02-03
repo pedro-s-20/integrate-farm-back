@@ -33,7 +33,7 @@ public class ClienteCreateDTO {
     @Schema(description = "Senha", example = "123senha123", required = true)
     private String senha;
     @NotBlank
-    @Size(max = 8)
+    @Size(max = 255)
     @Schema(description = "Endereço", example = "Rua Exemplo", required = true)
     private String endereco;
     @NotNull
@@ -42,19 +42,19 @@ public class ClienteCreateDTO {
     @Schema(description = "Número do endereço", example = "15", required = true)
     private Integer numero;
     @NotBlank
-    @Size(max = 8)
+    @Size(max = 200)
     @Schema(description = "Complemento", example = "Ap 123", required = true)
     private String complemento;
     @NotBlank
-    @Size(max = 8)
+    @Size(max = 100)
     @Schema(description = "Bairro", example = "Bela Vista", required = true)
     private String bairro;
     @NotBlank
-    @Size(max = 8)
+    @Size(max = 100)
     @Schema(description = "Cidade", example = "Xique-Xique", required = true)
     private String cidade;
     @NotBlank
-    @Size(max = 8)
+    @Size(max = 2)
     @Schema(description = "Estado", example = "BA", required = true)
     private String estado;
     @NotBlank

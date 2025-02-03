@@ -19,10 +19,13 @@
                         <strong>ID do agendamento: ${agendamento.getIdAgendamento()}</strong><br>
                         <strong>Data e horário: ${agendamento.getDataHorario()} <strong>
                         Prestador de serviço que lhe atenderá: ${agendamento.getPrestadorServicoEntity().getUsuarioEntity().getNome()} <br>
+                        Status: ${agendamento.getStatus()} <br>
+                        <em><strong>OBS.:</strong> Caso o agendamento esteja como "IMPEDIMENTO",
+                        algum de nossos colaboradores irá entrar em contato para combinar com você um melhor horário.<br></em>
                         Qualquer dúvida é só contatar o suporte pelo e-mail ${email}<br>
                         Att,<br>
                         Integrate Farm Corp.<br>
-                    </p>
+                        </p>
                     </td>
                 </tr>
             </table> <br> <br></td>
