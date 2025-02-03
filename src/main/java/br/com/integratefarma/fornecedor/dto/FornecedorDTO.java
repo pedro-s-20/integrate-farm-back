@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FornecedorDTO {
-    private Long id;
+    private Integer id;
     private String nome;
     private String cnpj;
     private String email;
@@ -16,7 +16,7 @@ public class FornecedorDTO {
     private String celular;
     private String cep;
     private String endereco;
-    private Long numero;
+    private Integer numero;
     private String complemento;
     private String bairro;
     private String cidade;

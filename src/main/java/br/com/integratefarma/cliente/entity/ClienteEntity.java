@@ -52,7 +52,7 @@ public class ClienteEntity {
     private String endereco;
 
     @Column(name = "numero")
-    private Long numero;
+    private Integer numero;
 
     @Column(name = "complemento")
     private String complemento;

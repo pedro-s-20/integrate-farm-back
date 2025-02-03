@@ -6,6 +6,9 @@ import br.com.integratefarma.cliente.dto.ClienteDTO;
 import br.com.integratefarma.cliente.dto.ClienteUpdateDTO;
 import br.com.integratefarma.cliente.service.ClienteService;
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
+import br.com.integratefarma.venda.dto.VendaCreateDTO;
+import br.com.integratefarma.venda.dto.VendaDTO;
+import br.com.integratefarma.venda.dto.VendaListaDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,6 +34,16 @@ public class ClienteController implements DocumentacaoCliente<ClienteDTO> {
     @Override
     public ResponseEntity<AgendamentoListaDTO> getClienteAgentamentos() throws RegraDeNegocioException {
         return new ResponseEntity<>(clienteService.getClienteAgentamentos(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<VendaListaDTO> getClienteCompras() throws RegraDeNegocioException {
+        return new ResponseEntity<>(clienteService.getClienteCompras(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<VendaDTO> createClienteVenda(VendaCreateDTO input) throws RegraDeNegocioException {
+        return new ResponseEntity<>(clienteService.createClienteVenda(input), HttpStatus.OK);
     }
 
     @Override

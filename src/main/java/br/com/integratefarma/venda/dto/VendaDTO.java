@@ -1,19 +1,23 @@
 package br.com.integratefarma.venda.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class VendaDTO {
-    private Long id;
+    private Integer id;
     private LocalDateTime dataVenda;
-    private BigDecimal totalVenda;
+    private Double totalVenda;
     private String observacoes;
-    private Long clienteId;
+    private Integer clienteId;
+    private Integer quantidadeParcelas;
+    private List<ProdutosVendaOutputDTO> produtos;
 }

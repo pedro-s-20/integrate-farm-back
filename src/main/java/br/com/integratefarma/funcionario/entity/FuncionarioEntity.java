@@ -17,7 +17,7 @@ public class FuncionarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "nome")
     private String nome;
@@ -53,7 +53,7 @@ public class FuncionarioEntity {
     private String endereco;
 
     @Column(name = "numero")
-    private Long numero;
+    private Integer numero;
 
     @Column(name = "complemento")
     private String complemento;

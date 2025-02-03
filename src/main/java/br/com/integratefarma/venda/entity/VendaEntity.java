@@ -25,16 +25,19 @@ public class VendaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "data_venda")
     private LocalDateTime dataVenda;
 
     @Column(name = "total_venda")
-    private BigDecimal totalVenda;
+    private Double totalVenda;
 
     @Column(name = "observacoes")
     private String observacoes;
+
+    @Column(name = "qnt_parcelas")
+    private Integer quantidadeParcelas;
 
     @Column(name = "cliente_id", insertable= false, updatable=false)
     private Integer clienteId;

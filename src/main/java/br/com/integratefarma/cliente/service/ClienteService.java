@@ -11,9 +11,16 @@ import br.com.integratefarma.cliente.repository.ClienteRepository;
 import br.com.integratefarma.email.enums.TipoEmail;
 import br.com.integratefarma.email.service.EmailService;
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
+import br.com.integratefarma.produto.entity.ProdutoEntity;
 import br.com.integratefarma.usuario.dto.UsuarioCreateDTO;
 import br.com.integratefarma.usuario.entity.UsuarioEntity;
 import br.com.integratefarma.usuario.service.UsuarioService;
+import br.com.integratefarma.venda.dto.ProdutosVendaOutputDTO;
+import br.com.integratefarma.venda.dto.VendaCreateDTO;
+import br.com.integratefarma.venda.dto.VendaDTO;
+import br.com.integratefarma.venda.dto.VendaListaDTO;
+import br.com.integratefarma.venda.entity.VendaEntity;
+import br.com.integratefarma.venda.service.VendaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.TemplateException;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +30,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -33,13 +43,15 @@ public class ClienteService {
     private final UsuarioService usuarioService;
     private final AgendamentoService agendamentoService;
     private final EmailService emailService;
+    private final VendaService vendaService;
 
-    public ClienteService(ClienteRepository clienteRepository, ObjectMapper objectMapper, UsuarioService usuarioService, @Lazy AgendamentoService agendamentoService, EmailService emailService) {
+    public ClienteService(ClienteRepository clienteRepository, ObjectMapper objectMapper, UsuarioService usuarioService, @Lazy AgendamentoService agendamentoService, EmailService emailService, @Lazy VendaService vendaService) {
         this.clienteRepository = clienteRepository;
         this.objectMapper = objectMapper;
         this.usuarioService = usuarioService;
         this.agendamentoService = agendamentoService;
         this.emailService = emailService;
+        this.vendaService = vendaService;
     }
 
     public ClienteCompletoDTO recuperarCliente() throws RegraDeNegocioException {
@@ -65,6 +77,42 @@ public class ClienteService {
         AgendamentoClienteRelatorioDTO agendamentoClienteRelatorioDTO = agendamentoService.getRelatorioClienteById(clienteCompletoDTO.getIdCliente());
 
         return objectMapper.convertValue(agendamentoClienteRelatorioDTO, AgendamentoListaDTO.class);
+    }
+
+    public VendaListaDTO getClienteCompras() {
+        ClienteEntity clienteEntity = clienteRepository.getClienteEntityByIdUsuario(usuarioService.getIdLoggedUser());
+        Set<VendaEntity> vendasEntityCliente = clienteEntity.getVendaEntities();
+        VendaListaDTO vendaListaDTO = VendaListaDTO.builder().build();
+        List<VendaDTO> listaVendas = new ArrayList<>();
+        for (VendaEntity venda: vendasEntityCliente) {
+            List<ProdutosVendaOutputDTO> produtosList = new ArrayList<>();
+            venda.getItemVendaEntities().forEach(itemVenda -> {
+                ProdutoEntity produtoEntity = itemVenda.getProdutoEntity();
+                ProdutosVendaOutputDTO produtoVendaDTO = ProdutosVendaOutputDTO.builder()
+                        .idProduto(produtoEntity.getId())
+                        .descricaoProduto(produtoEntity.getDescricao())
+                        .quantidade(itemVenda.getQuantidade())
+                        .build();
+                produtosList.add(produtoVendaDTO);
+            });
+
+            listaVendas.add(VendaDTO.builder()
+                                .id(venda.getId())
+                                .dataVenda(venda.getDataVenda())
+                                .totalVenda(venda.getTotalVenda())
+                                .observacoes(venda.getObservacoes())
+                                .clienteId(venda.getClienteId())
+                                .quantidadeParcelas(venda.getQuantidadeParcelas())
+                                .produtos(produtosList)
+                                .build());
+        }
+        vendaListaDTO.setVendaDTOList(listaVendas);
+        return vendaListaDTO;
+    }
+
+    public VendaDTO createClienteVenda(VendaCreateDTO input) {
+        ClienteEntity clienteEntity = clienteRepository.getClienteEntityByIdUsuario(usuarioService.getIdLoggedUser());
+        return vendaService.createClienteVenda(input, clienteEntity.getId());
     }
 
     public ClienteCompletoDTO adicionar(ClienteCreateDTO cliente) throws RegraDeNegocioException {
@@ -126,7 +174,6 @@ public class ClienteService {
             throw new RegraDeNegocioException("O nome da especialidade não pode conter número");
         }
     }
-
 
 }
 

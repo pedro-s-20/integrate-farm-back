@@ -10,9 +10,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProdutoDTO {
-    private Long id;
+    private Integer id;
     private String descricao;
-    private BigDecimal preco;
-    private Long quantidadeEstoque;
-    private Long fornecedorId;
+    private Double preco;
+    private Integer quantidadeEstoque;
+    private Integer fornecedorId;
 }

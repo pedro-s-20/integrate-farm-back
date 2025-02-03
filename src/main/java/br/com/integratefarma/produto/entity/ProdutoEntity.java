@@ -24,19 +24,19 @@ public class ProdutoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "preco")
-    private BigDecimal preco;
+    private Double preco;
 
     @Column(name = "qtd_estoque")
-    private Long quantidadeEstoque;
+    private Integer quantidadeEstoque;
 
     @Column(name = "for_id", insertable= false, updatable=false)
-    private Long fornecedorId;
+    private Integer fornecedorId;
 
     @JsonIgnore
     @ManyToOne()

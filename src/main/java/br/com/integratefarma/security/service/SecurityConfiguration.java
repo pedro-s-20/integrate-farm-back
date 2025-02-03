@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authz) -> authz
 //                        .antMatchers("/auth/**").permitAll() // comentar essa linha
                                 .antMatchers("/administrativo/**", "/agendamento/**", "/especialidade/**").hasRole("ADM")
-                                .antMatchers("/cliente/**").hasRole("CLIENTE")
+                                .antMatchers("/cliente/**", "/agendamento/**", "venda").hasRole("CLIENTE")
                                 .antMatchers("/prestador-servico/**").hasRole("PRESTADOR")
                         .anyRequest().authenticated()
                 );

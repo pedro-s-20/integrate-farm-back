@@ -17,7 +17,7 @@ public class ClienteDTO {
     private String celular;
     private String cep;
     private String endereco;
-    private Long numero;
+    private Integer numero;
     private String complemento;
     private String bairro;
     private String cidade;

@@ -23,22 +23,22 @@ public class ParcelaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "data_venda")
     private LocalDateTime dataVenda;
 
     @Column(name = "total")
-    private BigDecimal total;
+    private Double total;
 
     @Column(name = "parcela")
-    private BigDecimal parcela;
+    private Double parcela;
 
     @Column(name = "obs")
     private String observacao;
 
     @Column(name = "num_parcelas")
-    private Long numeroParcelas;
+    private Integer numeroParcelas;
 
     @Column(name = "cliente_id", insertable= false, updatable=false)
     private Integer clienteId;

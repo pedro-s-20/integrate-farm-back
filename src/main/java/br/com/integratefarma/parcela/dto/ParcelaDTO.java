@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParcelaDTO {
-    private Long id;
+    private Integer id;
     private LocalDateTime dataVenda;
-    private BigDecimal total;
-    private BigDecimal parcela;
+    private Double total;
+    private Double parcela;
     private String observacao;
-    private Long numeroParcelas;
-    private Long clienteId;
+    private Integer numeroParcelas;
+    private Integer clienteId;
 }
