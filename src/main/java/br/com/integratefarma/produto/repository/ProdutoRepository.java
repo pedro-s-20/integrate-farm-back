@@ -15,6 +15,7 @@ public interface ProdutoRepository extends JpaRepository<ProdutoEntity, Long> {
             " p.id, " +
             " p.descricao, " +
             " p.preco, " +
+            " p.linkImagem, " +
             " p.quantidadeEstoque) " +
             " from tb_produtos p"
     )

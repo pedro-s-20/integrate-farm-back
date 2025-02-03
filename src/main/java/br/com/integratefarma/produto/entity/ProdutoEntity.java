@@ -34,6 +34,9 @@ public class ProdutoEntity {
     @Column(name = "qtd_estoque")
     private Integer quantidadeEstoque;
 
+    @Column(name = "link_imagem")
+    private String linkImagem;
+
     @Column(name = "for_id", insertable= false, updatable=false)
     private Integer fornecedorId;
 
