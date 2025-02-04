@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProdutoRepository extends JpaRepository<ProdutoEntity, Long> {
+public interface ProdutoRepository extends JpaRepository<ProdutoEntity, Integer> {
 
     @Query("select new br.com.integratefarma.produto.dto.ProdutoDTO(" +
             " p.id, " +

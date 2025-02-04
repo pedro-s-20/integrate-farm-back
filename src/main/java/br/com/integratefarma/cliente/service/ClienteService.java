@@ -110,9 +110,9 @@ public class ClienteService {
         return vendaListaDTO;
     }
 
-    public VendaDTO createClienteVenda(VendaCreateDTO input) {
+    public VendaDTO createClienteVenda(VendaCreateDTO input) throws RegraDeNegocioException {
         ClienteEntity clienteEntity = clienteRepository.getClienteEntityByIdUsuario(usuarioService.getIdLoggedUser());
-        return vendaService.createClienteVenda(input, clienteEntity.getId());
+        return vendaService.createClienteVenda(input, clienteEntity);
     }
 
     public ClienteCompletoDTO adicionar(ClienteCreateDTO cliente) throws RegraDeNegocioException {

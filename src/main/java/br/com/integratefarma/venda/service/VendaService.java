@@ -1,10 +1,13 @@
 package br.com.integratefarma.venda.service;
 
+import br.com.integratefarma.cliente.entity.ClienteEntity;
+import br.com.integratefarma.exceptions.RegraDeNegocioException;
 import br.com.integratefarma.itemvenda.entity.ItemVendaEntity;
 import br.com.integratefarma.itemvenda.repository.ItemVendaRepository;
 import br.com.integratefarma.parcela.entity.ParcelaEntity;
 import br.com.integratefarma.parcela.repository.ParcelaRepository;
 import br.com.integratefarma.produto.entity.ProdutoEntity;
+import br.com.integratefarma.produto.repository.ProdutoRepository;
 import br.com.integratefarma.venda.dto.ProdutoQuantidadeDTO;
 import br.com.integratefarma.venda.dto.ProdutosVendaOutputDTO;
 import br.com.integratefarma.venda.dto.VendaCreateDTO;
@@ -15,9 +18,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -27,36 +34,44 @@ public class VendaService {
     private final VendaRepository vendaRepository;
     private final ItemVendaRepository itemVendaRepository;
     private final ParcelaRepository parcelaRepository;
+    private final ProdutoRepository produtoRepository;
 
-    public VendaDTO createClienteVenda(VendaCreateDTO input, Integer idCliente) {
+    public VendaDTO createClienteVenda(VendaCreateDTO input, ClienteEntity cliente) throws RegraDeNegocioException {
         VendaEntity newVenda = new VendaEntity();
-        newVenda.setClienteId(idCliente);
+        newVenda.setClienteEntity(cliente);
         newVenda.setDataVenda(input.getDataVenda());
         newVenda.setTotalVenda(input.getTotalVenda());
         newVenda.setObservacoes(input.getObservacoes());
         newVenda.setQuantidadeParcelas(input.getQuantidadeParcelas());
 
-        VendaEntity vendaAdicionada = vendaRepository.save(newVenda);
-
+        Set<ItemVendaEntity> itemVendaToAdd = new HashSet<>();
         for(ProdutoQuantidadeDTO produtoQuantidade: input.getProdutos()) {
             ItemVendaEntity itemVenda = new ItemVendaEntity();
-            itemVenda.setIdVenda(vendaAdicionada.getId());
-            itemVenda.setIdProduto(produtoQuantidade.getIdProduto());
+            ProdutoEntity produto = produtoRepository.findById(produtoQuantidade.getIdProduto())
+                    .orElseThrow(() -> new RegraDeNegocioException("Esta compra contém produto que não existe!"));
+            itemVenda.setProdutoEntity(produto);
             itemVenda.setQuantidade(produtoQuantidade.getQuantidade());
-            itemVenda.setSubtotal(produtoQuantidade.getSubtotal());
-            itemVendaRepository.save(itemVenda);
+            Double valorCadaProduto = BigDecimal.valueOf(produtoQuantidade.getSubtotal())
+                    .divide(BigDecimal.valueOf(produtoQuantidade.getQuantidade()), 2, RoundingMode.HALF_UP).doubleValue();
+            itemVenda.setSubtotal(valorCadaProduto);
+            itemVendaToAdd.add(itemVenda);
         }
 
+        newVenda.setItemVendaEntities(itemVendaToAdd);
+        VendaEntity vendaAdicionada = vendaRepository.save(newVenda);
+
         if (input.getQuantidadeParcelas() > 0) {
-            Double valorCadaParcela = Math.round(input.getTotalVenda() / input.getQuantidadeParcelas()) / 100.0;
+            Double valorCadaParcela = BigDecimal.valueOf(vendaAdicionada.getTotalVenda())
+                    .divide(BigDecimal.valueOf(vendaAdicionada.getQuantidadeParcelas()), 2, RoundingMode.HALF_UP).doubleValue();
 
             for (int i = 0; i < input.getQuantidadeParcelas(); i++) {
                 ParcelaEntity newParcela = new ParcelaEntity();
                 newParcela.setDataVenda(LocalDateTime.now());
-                newParcela.setTotal(valorCadaParcela);
+                newParcela.setTotal(vendaAdicionada.getTotalVenda());
                 newParcela.setObservacao(input.getObservacoesParcela());
                 newParcela.setNumeroParcelas(input.getQuantidadeParcelas());
-                newParcela.setClienteId(idCliente);
+                newParcela.setClienteEntity(cliente);
+                newParcela.setParcela(valorCadaParcela);
                 parcelaRepository.save(newParcela);
             }
         }
@@ -77,7 +92,7 @@ public class VendaService {
                 .dataVenda(vendaAdicionada.getDataVenda())
                 .totalVenda(vendaAdicionada.getTotalVenda())
                 .observacoes(vendaAdicionada.getObservacoes())
-                .clienteId(vendaAdicionada.getClienteId())
+                .clienteId(cliente.getId())
                 .quantidadeParcelas(vendaAdicionada.getQuantidadeParcelas())
                 .produtos(produtosList)
                 .build();

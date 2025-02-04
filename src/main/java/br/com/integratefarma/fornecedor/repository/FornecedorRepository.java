@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface FornecedorRepository extends JpaRepository<FornecedorEntity, Long> {
+public interface FornecedorRepository extends JpaRepository<FornecedorEntity, Integer> {
 
 }

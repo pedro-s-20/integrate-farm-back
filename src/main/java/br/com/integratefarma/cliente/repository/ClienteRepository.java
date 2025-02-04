@@ -12,7 +12,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface ClienteRepository extends JpaRepository<ClienteEntity, Long> {
+public interface ClienteRepository extends JpaRepository<ClienteEntity, Integer> {
 
     @Query("select new br.com.integratefarma.cliente.dto.ClienteCompletoDTO(" +
             "c.id, " +
