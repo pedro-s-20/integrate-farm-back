@@ -1,6 +1,5 @@
 package br.com.integratefarma.produto.entity;
 
-import br.com.integratefarma.fornecedor.entity.FornecedorEntity;
 import br.com.integratefarma.itemvenda.entity.ItemVendaEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,13 +36,8 @@ public class ProdutoEntity {
     @Column(name = "link_imagem")
     private String linkImagem;
 
-    @Column(name = "for_id", insertable= false, updatable=false)
+    @Column(name = "for_id")
     private Integer fornecedorId;
-
-    @JsonIgnore
-    @ManyToOne()
-    @JoinColumn(name = "for_id", referencedColumnName = "id")
-    private FornecedorEntity fornecedorEntity;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "produtoEntity", cascade = CascadeType.MERGE)

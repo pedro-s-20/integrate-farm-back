@@ -1,57 +1,58 @@
-package br.com.integratefarma.produto.controller;
+package br.com.integratefarma.fornecedor_RMI.controller;
 
 import br.com.integratefarma.exceptions.RegraDeNegocioException;
-import br.com.integratefarma.utils.dto.PageDTO;
-import br.com.sistema.model.Produtos;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public interface DocumentacaoProduto<ProdutoDTO> {
-    @Operation(summary = "Lista todos os produtos", description = "Lista todos os produtos de forma paginada")
+import java.util.List;
+
+public interface DocumentacaoFornecedor<Fornecedores> {
+
+    @Operation(summary = "Listar Fornecedores", description = "Lista todos os Fornecedores")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Os prestadores de servico foram listados com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "Todos os Fornecedores foram listados com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @GetMapping("/paginado-produtos/")
-    ResponseEntity<PageDTO<ProdutoDTO>> paginadoProdutos(Integer pagina, Integer tamanho);
+    @GetMapping()
+    ResponseEntity<List<Fornecedores>> list() throws RegraDeNegocioException;
 
-
-    @Operation(summary = "Criar Produto", description = "Cria um Produto")
+    @Operation(summary = "Criar Fornecedores", description = "Cria um Fornecedores")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Produto criado com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "Fornecedor criado com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
     @PostMapping
-    ResponseEntity<Void> create(@RequestBody Produtos e) throws RegraDeNegocioException;
+    ResponseEntity<Void> create(@RequestBody Fornecedores e) throws RegraDeNegocioException;
 
-    @Operation(summary = "Atualizar Produto", description = "Atualiza um Produto passado por parâmetro")
+
+    @Operation(summary = "Atualizar Fornecedor", description = "Atualiza um Fornecedor passado por parâmetro")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "Fornecedor atualizado com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
     @PutMapping()
-    ResponseEntity<Void> update(@RequestBody Produtos e) throws RegraDeNegocioException;
+    ResponseEntity<Void> update(@RequestBody Fornecedores e) throws RegraDeNegocioException;
 
-    @Operation(summary = "Deletar Produto", description = "Detela um Produto passado por parâmetro")
+    @Operation(summary = "Deletar Fornecedor", description = "Detela um Fornecedor passado por parâmetro")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Produto deletado com sucesso"),
+                    @ApiResponse(responseCode = "200", description = "Fornecedor deletado com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
     @DeleteMapping()
-    ResponseEntity<Void> delete(@RequestBody Produtos e) throws RegraDeNegocioException;
+    ResponseEntity<Void> delete(@RequestBody Fornecedores e) throws RegraDeNegocioException;
 }
