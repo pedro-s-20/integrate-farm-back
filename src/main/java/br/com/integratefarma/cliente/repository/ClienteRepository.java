@@ -24,7 +24,7 @@ public interface ClienteRepository extends JpaRepository<ClienteEntity, Integer>
             "u.contatos, " +
             "u.cep, " +
             "u.numero) " +
-            "from tb_clientes c" +
+            "from ClienteEntity c" +
             " left join c.usuarioEntity u " +
             " left join c.usuarioEntity.cargoEntity ca" +
             " where c.id = :id" +
@@ -42,14 +42,14 @@ public interface ClienteRepository extends JpaRepository<ClienteEntity, Integer>
             "u.contatos, " +
             "u.cep, " +
             "u.numero) " +
-            "from tb_clientes c" +
+            "from ClienteEntity c" +
             " left join c.usuarioEntity u " +
             " left join c.usuarioEntity.cargoEntity ca" +
             " where c.usuarioEntity.ativo = 1"
     )
     Page<ClienteCompletoDTO> listarFull(Pageable pageable);
 
-    @Query("SELECT c from tb_clientes c where c.id = :id and c.usuarioEntity.ativo = 1")
+    @Query("SELECT c from ClienteEntity c where c.id = :id and c.usuarioEntity.ativo = 1")
     Optional<ClienteEntity> findById(Integer id);
 
     ClienteEntity getClienteEntityByIdUsuario(Integer idLoggedUser);

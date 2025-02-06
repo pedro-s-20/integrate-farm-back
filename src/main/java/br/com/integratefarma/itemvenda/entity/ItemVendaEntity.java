@@ -16,7 +16,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Entity(name = "tb_itensvendas")
+@Table(name = "tb_itensvendas")
+@Entity
 public class ItemVendaEntity {
 
     @Id

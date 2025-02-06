@@ -11,7 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "tb_funcionarios")
+@Table(name = "tb_funcionarios")
+@Entity
 public class FuncionarioEntity {
 
     @Id

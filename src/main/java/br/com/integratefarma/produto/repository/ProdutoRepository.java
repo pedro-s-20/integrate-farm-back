@@ -17,7 +17,7 @@ public interface ProdutoRepository extends JpaRepository<ProdutoEntity, Integer>
             " p.preco, " +
             " p.linkImagem, " +
             " p.quantidadeEstoque) " +
-            " from tb_produtos p"
+            " from ProdutoEntity p"
     )
     Page<ProdutoDTO> listarFull(Pageable solicitacaoPagina);
 }

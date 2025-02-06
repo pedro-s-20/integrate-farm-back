@@ -16,7 +16,8 @@ import java.util.Set;
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Entity(name = "tb_produtos")
+@Table(name = "tb_parcelas")
+@Entity
 public class ProdutoEntity {
 
     @Id

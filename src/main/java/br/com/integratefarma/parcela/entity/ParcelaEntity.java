@@ -16,7 +16,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Entity(name = "tb_parcelas")
+@Table(name = "tb_parcelas")
+@Entity
 public class ParcelaEntity {
 
     @Id

@@ -27,7 +27,7 @@ public interface PrestadorServicoRepository extends JpaRepository<PrestadorServi
             " u.contatos, " +
             " u.cep, " +
             " u.numero) " +
-            " from PRESTADOR_SERVICO m" +
+            " from PrestadorServicoEntity m" +
             " left join m.usuarioEntity u" +
             " left join m.especialidadeEntity es" +
             " left join u.cargoEntity ca" +
@@ -50,7 +50,7 @@ public interface PrestadorServicoRepository extends JpaRepository<PrestadorServi
             " u.contatos, " +
             " u.cep, " +
             " u.numero) " +
-            " from PRESTADOR_SERVICO m" +
+            " from PrestadorServicoEntity m" +
             " left join m.usuarioEntity u" +
             " left join u.cargoEntity ca" +
             " left join m.especialidadeEntity es" +
@@ -59,7 +59,7 @@ public interface PrestadorServicoRepository extends JpaRepository<PrestadorServi
     Page<PrestadorServicoCompletoDTO> listarFull(Pageable pageable);
 
 
-    @Query("SELECT m from PRESTADOR_SERVICO m where m.idPrestadorServico = :id and m.usuarioEntity.ativo = 1")
+    @Query("SELECT m from PrestadorServicoEntity m where m.idPrestadorServico = :id and m.usuarioEntity.ativo = 1")
     Optional<PrestadorServicoEntity> findById(Integer id);
 
     PrestadorServicoEntity getPrestadorServicoEntityByIdUsuario(Integer idLoggedUser);
