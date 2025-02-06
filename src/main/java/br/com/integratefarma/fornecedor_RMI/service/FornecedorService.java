@@ -5,6 +5,7 @@ import br.com.sistema.model.Fornecedores;
 import br.com.sistema.rmi.FornecedoresService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.rmi.registry.LocateRegistry;
@@ -16,10 +17,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FornecedorService {
 
+    @Value("${rmi.host}")
+    private String RMI_HOST;
+
     public boolean salvarFornecedoresDao(Fornecedores input) throws RegraDeNegocioException {
         try {
             // Obter o registro RMI
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry(RMI_HOST, 1099);
 
             // Procurar o serviço remoto
             FornecedoresService service = (FornecedoresService) registry.lookup("FornecedoresService");
@@ -34,7 +38,7 @@ public class FornecedorService {
     public boolean editarFornecedoreDao(Fornecedores input) throws RegraDeNegocioException {
         try {
             // Obter o registro RMI
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry(RMI_HOST, 1099);
 
             // Procurar o serviço remoto
             FornecedoresService service = (FornecedoresService) registry.lookup("FornecedoresService");
@@ -49,7 +53,7 @@ public class FornecedorService {
     public boolean ecluirFornecedoreDao(Fornecedores input) throws RegraDeNegocioException {
         try {
             // Obter o registro RMI
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry(RMI_HOST, 1099);
 
             // Procurar o serviço remoto
             FornecedoresService service = (FornecedoresService) registry.lookup("FornecedoresService");
@@ -64,7 +68,7 @@ public class FornecedorService {
     public Fornecedores buscarFornecedoresDao(String nome) throws RegraDeNegocioException {
         try {
             // Obter o registro RMI
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry(RMI_HOST, 1099);
 
             // Procurar o serviço remoto
             FornecedoresService service = (FornecedoresService) registry.lookup("FornecedoresService");
@@ -78,7 +82,7 @@ public class FornecedorService {
     public List<Fornecedores> listarFornecedoreDao() throws RegraDeNegocioException {
         try {
             // Obter o registro RMI
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry(RMI_HOST, 1099);
 
             // Procurar o serviço remoto
             FornecedoresService service = (FornecedoresService) registry.lookup("FornecedoresService");

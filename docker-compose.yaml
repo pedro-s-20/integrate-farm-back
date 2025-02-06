@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /usr/src/farma
+    container_name: integrate-farma-back
+    restart: on-failure
+    env_file: ./.env
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://$MYSQLDB_LOCAL_ADDRESS:$MYSQLDB_LOCAL_PORT/$MYSQLDB_DATABASE?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=$MYSQLDB_USER
+      - SPRING_DATASOURCE_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - SPRING_MAIL_HOST=$MAIL_HOST
+      - SPRING_MAIL_PORT=$MAIL_PORT
+      - SPRING_MAIL_NAME=$MAIL_NAME
+      - SPRING_MAIL_PASS=$MAIL_PASS
+      - SPRING_JWT_SECRET=$JWT_SECRET
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true

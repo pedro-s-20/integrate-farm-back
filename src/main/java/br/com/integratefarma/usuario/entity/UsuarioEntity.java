@@ -21,7 +21,8 @@ import java.util.Collections;
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Entity(name = "Usuario")
+@Table(name = "USUARIO")
+@Entity
 public class UsuarioEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

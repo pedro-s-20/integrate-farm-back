@@ -12,6 +12,7 @@ import br.com.integratefarma.usuario.entity.UsuarioEntity;
 import br.com.integratefarma.usuario.repository.UsuarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.TemplateException;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
