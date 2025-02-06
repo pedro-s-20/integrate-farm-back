@@ -17,7 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "CARGO")
+@Table(name = "cargo")
 @Entity
 public class CargoEntity implements GrantedAuthority {
     @Id

@@ -21,7 +21,7 @@ import java.util.Collections;
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "USUARIO")
+@Table(name = "usuario")
 @Entity
 public class UsuarioEntity implements UserDetails {
     @Id
